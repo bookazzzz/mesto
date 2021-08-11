@@ -11,6 +11,7 @@
 @import url(../blocks/profile/__subtitle/profile__subtitle.css);
 @import url(../blocks/profile/__vector/profile__vector.css);
 @import url(../blocks/profile/__vector-two/profile__vector-two.css);
+@import url(../blocks/profile/__main/profile__main.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/element/element.css);
 @import url(../blocks/element/__image/element__image.css);
