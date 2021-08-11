@@ -7,3 +7,8 @@
   height: 50px;
   color: inherit;
 }
+
+.profile__vector-two:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}

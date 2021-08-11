@@ -6,3 +6,8 @@
   margin-top: 15px;
   text-decoration: none;
 }
+
+.profile__vector:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
