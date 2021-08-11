@@ -11,3 +11,11 @@
 @import url(../blocks/profile/__subtitle/profile__subtitle.css);
 @import url(../blocks/profile/__vector/profile__vector.css);
 @import url(../blocks/profile/__vector-two/profile__vector-two.css);
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/element/element.css);
+@import url(../blocks/element/__image/element__image.css);
+@import url(../blocks/element/__social/element__social.css);
+@import url(../blocks/element/__name/element__name.css);
+@import url(../blocks/element/__heart/element__heart.css);
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
