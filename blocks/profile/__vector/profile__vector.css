@@ -11,3 +11,11 @@
   opacity: 0.5;
   cursor: pointer;
 }
+
+
+@media screen and (max-width: 767px) {
+  .profile__vector {
+    padding: 5.25px 5.25px 5.25px 5.25px;
+    margin-top: 8px;
+  }
+}

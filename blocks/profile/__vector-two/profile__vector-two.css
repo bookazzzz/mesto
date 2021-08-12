@@ -12,3 +12,10 @@
   opacity: 0.5;
   cursor: pointer;
 }
+
+@media screen and (max-width: 767px) {
+  .profile__vector-two {
+    width: 282px;
+    padding: 17px 134px 17px 134px;
+  }
+}
