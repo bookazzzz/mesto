@@ -1,4 +1,4 @@
-.profile__vector-two {
+.profile__vector_gallery {
   border: 2px solid #FFFFFF;
   border-radius: 2px;
   background: transparent center no-repeat url(../../../images/plus.svg);
@@ -8,13 +8,13 @@
   color: inherit;
 }
 
-.profile__vector-two:hover {
+.profile__vector_gallery:hover {
   opacity: 0.5;
   cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
-  .profile__vector-two {
+  .profile__vector_gallery {
     width: 282px;
     padding: 17px 134px 17px 134px;
   }
