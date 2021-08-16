@@ -1,4 +1,4 @@
-let openPopupButton = document.querySelector('.profile__vector');
+let openPopupButton = document.querySelector('.profile__edit');
 let popup = document.querySelector('.popup');
 let closePopupButton = document.querySelector('.popup__close');
 let formElement = document.querySelector('.popup__form')

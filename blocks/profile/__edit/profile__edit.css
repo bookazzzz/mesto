@@ -1,4 +1,4 @@
-.profile__vector {
+.profile__edit {
   border: 1px solid #FFFFFF;
   padding: 7px 7px 7px 7px;
   color: inherit;
@@ -7,14 +7,14 @@
   text-decoration: none;
 }
 
-.profile__vector:hover {
-  opacity: 0.5;
+.profile__edit:hover {
+  opacity: 0.6;
   cursor: pointer;
 }
 
 
 @media screen and (max-width: 767px) {
-  .profile__vector {
+  .profile__edit {
     padding: 5.25px 5.25px 5.25px 5.25px;
     margin-top: 8px;
   }

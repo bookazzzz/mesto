@@ -9,93 +9,126 @@
   <body>
     <div class="root">
       <header class="header">
-        <img class="header__logo" src="./images/logo.png" alt="лого">
-        <hr class="header__line">
+        <img class="header__logo" src="./images/logo.svg" alt="лого" />
+        <div class="header__line"></div>
       </header>
 
       <main>
         <section class="profile">
-          <div class ="profile__main">
-         <img class="profile__avatar" src="./images/Kusto.jpg" alt="Фото Жак-Ив Кусто">
-         <div class="profile__info">
-           <h1 class="profile__title">Жак-Ив Кусто</h1>
-           <button class="profile__vector"></button>
-           <p class="profile__subtitle">Исследователь океана</p>
-         </div>
-        </div>
-            <button class="profile__vector_gallery"></button>
+          <div class="profile__main">
+            <img
+              class="profile__avatar"
+              src="./images/Kusto.jpg"
+              alt="Фото Жак-Ив Кусто"
+            />
+            <div class="profile__info">
+              <h1 class="profile__title">Жак-Ив Кусто</h1>
+              <button class="profile__edit" type="button"></button>
+              <p class="profile__subtitle">Исследователь океана</p>
+            </div>
+          </div>
+          <button class="profile__add-card" type="button"></button>
         </section>
 
         <section class="elements">
           <div class="element">
-            <img class="element__image" src="./images/Karachaevsk.jpg" alt="карачаевск">
+            <img
+              class="element__image"
+              src="./images/Karachaevsk.jpg"
+              alt="карачаевск"
+            />
             <div class="element__social">
               <h2 class="element__name">Карачаевск</h2>
-              <button class="element__heart"></button>
+              <button class="element__heart" type="button"></button>
             </div>
           </div>
 
           <div class="element">
-            <img class="element__image" src="./images/Elbrus.jpg" alt="Гора Эльбрус">
+            <img
+              class="element__image"
+              src="./images/Elbrus.jpg"
+              alt="Гора Эльбрус"
+            />
             <div class="element__social">
               <h2 class="element__name">Гора Эльбрус</h2>
-              <button class="element__heart"></button>
+              <button class="element__heart" type="button"></button>
             </div>
           </div>
 
           <div class="element">
-            <img class="element__image" src="./images/dombai.jpg" alt="Домбай">
+            <img
+              class="element__image"
+              src="./images/dombai.jpg"
+              alt="Домбай"
+            />
             <div class="element__social">
               <h2 class="element__name">Домбай</h2>
-              <button class="element__heart"></button>
+              <button class="element__heart" type="button"></button>
             </div>
           </div>
 
           <div class="element">
-            <img class="element__image" src="./images/Elbrus.jpg" alt="Гора Эльбрус">
+            <img
+              class="element__image"
+              src="./images/Elbrus.jpg"
+              alt="Гора Эльбрус"
+            />
             <div class="element__social">
               <h2 class="element__name">Гора Эльбрус</h2>
-              <button class="element__heart"></button>
+              <button class="element__heart" type="button"></button>
             </div>
           </div>
 
           <div class="element">
-            <img class="element__image" src="./images/dombai.jpg" alt="Домбай">
+            <img
+              class="element__image"
+              src="./images/dombai.jpg"
+              alt="Домбай"
+            />
             <div class="element__social">
               <h2 class="element__name">Домбай</h2>
-              <button class="element__heart"></button>
+              <button class="element__heart" type="button"></button>
             </div>
           </div>
 
           <div class="element">
-            <img class="element__image" src="./images/Karachaevsk.jpg" alt="Карачаево-Черкессия">
+            <img
+              class="element__image"
+              src="./images/Karachaevsk.jpg"
+              alt="Карачаево-Черкессия"
+            />
             <div class="element__social">
               <h2 class="element__name">Карачаево-Черкессия</h2>
-              <button class="element__heart"></button>
+              <button class="element__heart" type="button"></button>
             </div>
           </div>
         </section>
 
         <div class="popup">
-          <div class="popup__conteiner">
             <div class="popup__content">
-              <h3 class="popup__title">Редактировать профиль</h3>
-              <img class="popup__close" src="./images/Close Icon.svg" alt="иконка закрытия формы">
-              <form class="popup__form" name="form">
-                <input class="popup__field popup__field_name" type="text" name="fieldone">
-                <input class="popup__field popup__field_jobs" type="text" name="fieldtwo">
+              <h2 class="popup__title">Редактировать профиль</h2>
+              <button class="popup__close" type="submit"></button>
+              <form class="popup__form" name="edit-profile">
+                <input
+                  class="popup__field popup__field_name"
+                  type="text"
+                  name="fieldone"
+                />
+                <input
+                  class="popup__field popup__field_jobs"
+                  type="text"
+                  name="fieldtwo"
+                />
                 <button class="popup__button" type="submit">Сохранить</button>
               </form>
             </div>
-          </div>
         </div>
-
-        </main>
+      </main>
 
       <footer class="footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
       </footer>
     </div>
-    <script src="./script.js"></script>
+    <script src="./script/script.js"></script>
   </body>
 </html>

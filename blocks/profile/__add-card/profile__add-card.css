@@ -1,4 +1,4 @@
-.profile__vector_gallery {
+.profile__add-card {
   border: 2px solid #FFFFFF;
   border-radius: 2px;
   background: transparent center no-repeat url(../../../images/plus.svg);
@@ -8,14 +8,15 @@
   color: inherit;
 }
 
-.profile__vector_gallery:hover {
-  opacity: 0.5;
+.profile__add-card:hover {
+  opacity: 0.6;
   cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
-  .profile__vector_gallery {
+  .profile__add-card {
     width: 282px;
     padding: 17px 134px 17px 134px;
+    background-size: 16px 16px;
   }
 }
