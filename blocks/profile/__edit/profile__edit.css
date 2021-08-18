@@ -4,7 +4,9 @@
   color: inherit;
   background: transparent center no-repeat url(../../../images/Vector.svg);
   margin-top: 15px;
-  text-decoration: none;
+  width: 24px;
+  height: 24px;
+
 }
 
 .profile__edit:hover {
@@ -17,5 +19,7 @@
   .profile__edit {
     padding: 5.25px 5.25px 5.25px 5.25px;
     margin-top: 8px;
+    width: 18px;
+    height: 18px;
   }
 }
