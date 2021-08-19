@@ -1,5 +1,4 @@
 .popup {
-  display: flex; /* без этого флекса будет горизонтальный скролл на 320 */
   align-items: center;
   justify-content: center;
   position: fixed;

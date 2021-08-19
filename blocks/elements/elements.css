@@ -27,5 +27,6 @@
     max-width: 282px;
     grid-template-columns: 100%;
     gap: 20px;
+    padding-top: 36px;
   }
 }
