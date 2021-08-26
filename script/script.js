@@ -11,6 +11,7 @@ let jobProfile = document.querySelector('.profile__subtitle');
 let popupInputName = document.querySelector('.popup__field_type_name');
 let popupInputJobs = document.querySelector('.popup__field_type_jobs');
 let hearts = document.querySelectorAll('.element__heart');
+const cardContainer = document.querySelector('.elements');
 
 
 // Открытие и закрытие попапа profile
@@ -44,12 +45,34 @@ function heartFillToggle(event) {
  }
 
 
-// Отправка формы
+// Отправка формы редактирования профиля
 function formSubmitHandler(evt) {
     evt.preventDefault();
     nameProfile.textContent=popupInputName.value;
     jobProfile.textContent=popupInputJobs.value;
     closePofilePopup ();
+}
+
+// добавление карточки
+function addCard (imageValue, nameValue) {
+  const cardTemplate = document.querySelector('#element-template').content;
+  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+  cardElement.querySelector('.element__image').src = imageValue;
+  cardElement.querySelector('.element__name').textContent = nameValue;
+  cardElement.querySelector('.element__heart').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('element__heart_fill');
+  });
+  cardContainer.append(cardElement);
+}
+// Отправка формы добавления карточки
+function formSubmitCard(evt) {
+  evt.preventDefault();
+  const image = document.querySelector('.popup__field_type_card-link');
+  const name = document.querySelector('.popup__field_type_card-name');
+  addCard(image.value, name.value);
+  image.value = '';
+  name.value = '';
+  closeAddCardPopup ();
 }
 
 // Массив с карточками
@@ -90,4 +113,5 @@ openPopupAddCardButton.addEventListener('click', openAddCardPopup);
 closePopupAddCardButton.addEventListener('click', closeAddCardPopup);
 // Обработчики кликов на кнопку отправки формы
 formElement.addEventListener('submit', formSubmitHandler);
-
+// Обработчики кликов на кнопку отправки формы добавления карточки
+formElementAddCard.addEventListener('submit', formSubmitCard);
