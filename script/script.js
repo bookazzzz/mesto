@@ -62,7 +62,10 @@ function addCard (imageValue, nameValue) {
   cardElement.querySelector('.element__heart').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__heart_fill');
   });
-  cardContainer.append(cardElement);
+  cardElement.querySelector('.element__delete').addEventListener('click', function (evt) {
+    evt.target.closest('.element').remove();
+  });
+  cardContainer.prepend(cardElement);
 }
 // Отправка формы добавления карточки
 function formSubmitCard(evt) {
@@ -74,6 +77,8 @@ function formSubmitCard(evt) {
   name.value = '';
   closeAddCardPopup ();
 }
+
+//загрузка карточек из массива
 
 // Массив с карточками
 const initialCards = [
@@ -103,7 +108,20 @@ const initialCards = [
   }
 ];
 
+initialCards.forEach((card) => {
+  const cardTemplate = document.querySelector('#element-template').content;
+  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
 
+  cardElement.querySelector('.element__image').src = card.link;
+  cardElement.querySelector('.element__name').textContent = card.name;
+  cardElement.querySelector('.element__heart').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('element__heart_fill');
+  });
+  cardElement.querySelector('.element__delete').addEventListener('click', function (evt) {
+    evt.target.closest('.element').remove();
+  });
+  cardContainer.prepend(cardElement);
+});
 
 // Обработчики кликов на кнопку редактирования профиля
 openPopupButton.addEventListener('click', openPofilePopup);
