@@ -12,7 +12,7 @@ let popupInputName = document.querySelector('.popup__field_type_name');
 let popupInputJobs = document.querySelector('.popup__field_type_jobs');
 let hearts = document.querySelectorAll('.element__heart');
 const cardContainer = document.querySelector('.elements');
-let popupBigImg = document.querySelector('.popup__big-size-image');
+let popupBigImg = document.querySelector('.popup_big-size-image');
 // let popupOpenBigImg = document.querySelector('.element__image');
 let popupCloseBigImg = document.querySelector('.popup__close_type_big-image');
 
