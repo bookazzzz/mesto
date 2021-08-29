@@ -12,6 +12,9 @@ let popupInputName = document.querySelector('.popup__field_type_name');
 let popupInputJobs = document.querySelector('.popup__field_type_jobs');
 let hearts = document.querySelectorAll('.element__heart');
 const cardContainer = document.querySelector('.elements');
+let popupBigImg = document.querySelector('.popup__big-size-image');
+// let popupOpenBigImg = document.querySelector('.element__image');
+let popupCloseBigImg = document.querySelector('.popup__close_type_big-image');
 
 
 // Открытие и закрытие попапа profile
@@ -33,6 +36,24 @@ function openAddCardPopup () {
 
 function closeAddCardPopup () {
   popupAddCard.classList.remove('popup_opened');
+}
+
+//открытие и закрытие попапа картинки
+
+function openPopupBigImg () {
+  popupBigImg.classList.add('popup_opened');
+}
+
+function closePopupBigImg () {
+  popupBigImg.classList.remove('popup_opened');
+}
+//обработчик клика для карточки
+function elementClickHandler(event) {
+  const imgSrc = event.target.src;
+  const NameImg = event.target.parentNode.textContent
+  openPopupBigImg();
+  document.querySelector('.popup__big-img').src = imgSrc;
+  document.querySelector('.popup__name_big-img').textContent = NameImg;
 }
 
 // Реализация постановки лайков.
@@ -65,6 +86,12 @@ function addCard (imageValue, nameValue) {
   cardElement.querySelector('.element__delete').addEventListener('click', function (evt) {
     evt.target.closest('.element').remove();
   });
+
+
+  cardElement.querySelector('.element__image').addEventListener('click', elementClickHandler)
+
+  //селектор кнопки закрытия попапа с картинкой , addeventlistener с закрытием попапа
+
   cardContainer.prepend(cardElement);
 }
 // Отправка формы добавления карточки
@@ -77,8 +104,6 @@ function formSubmitCard(evt) {
   name.value = '';
   closeAddCardPopup ();
 }
-
-//загрузка карточек из массива
 
 // Массив с карточками
 const initialCards = [
@@ -107,7 +132,7 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
+//загрузка карточек из массива
 initialCards.forEach((card) => {
   const cardTemplate = document.querySelector('#element-template').content;
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
@@ -120,6 +145,8 @@ initialCards.forEach((card) => {
   cardElement.querySelector('.element__delete').addEventListener('click', function (evt) {
     evt.target.closest('.element').remove();
   });
+
+  cardElement.querySelector('.element__image').addEventListener('click', elementClickHandler)
   cardContainer.prepend(cardElement);
 });
 
@@ -133,3 +160,5 @@ closePopupAddCardButton.addEventListener('click', closeAddCardPopup);
 formElement.addEventListener('submit', formSubmitHandler);
 // Обработчики кликов на кнопку отправки формы добавления карточки
 formElementAddCard.addEventListener('submit', formSubmitCard);
+// Обработчики кликов на карточку
+popupCloseBigImg.addEventListener('click', closePopupBigImg);

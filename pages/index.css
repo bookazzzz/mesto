@@ -23,7 +23,10 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__name_big-img/popup__name_big-img.css);
+@import url(../blocks/popup/__content/_type/popup__content_type_big-image.css);
 @import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__big-img/popup__big-img.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__field/popup__field.css);
 @import url(../blocks/popup/__content/popup__content.css);
