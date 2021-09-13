@@ -1,5 +1,5 @@
 //включение видимости ошибки
-const showInputError = (formElement,inputElement,errorElement,inputErrorClass,errorClass) => {
+const showInputError = (inputElement,errorElement,inputErrorClass,errorClass) => {
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = inputElement.validationMessage;
   errorElement.classList.add(errorClass)
@@ -7,19 +7,26 @@ const showInputError = (formElement,inputElement,errorElement,inputErrorClass,er
 
 
 //скрытие видимости ошибки
-const hideInputError = (formElement,inputElement,errorElement,inputErrorClass,errorClass) => {
+const hideInputError = (inputElement,errorElement,inputErrorClass,errorClass) => {
   inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 };
 
+//Проверка на пустые поля
+const hasNotInputValues = (inputList) => {
+   return inputList.every(inputElement => {
+     return inputElement.value.length === 0;
+   });
+};
+
 //Функция проверяет валидность поля
 const checkInputValidity = (formElement,inputElement,inputErrorClass,errorClass) => {
-  const errorElement = formElement.querySelector('#${inputElement.id}-error');
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   if (!inputElement.validity.valid) {
-    showInputError(formElement,inputElement,errorElement,inputErrorClass,errorClass);
+    showInputError(inputElement,errorElement,inputErrorClass,errorClass);
   } else {
-    hideInputError(formElement,inputElement,errorElement,inputErrorClass,errorClass);
+    hideInputError(inputElement,errorElement,inputErrorClass,errorClass);
   }
 };
 
@@ -42,7 +49,7 @@ const enableSubmitButton = (buttonElement,inactiveButtonClass) => {
 const toggleButtonState = (formElement,inputList, submitButtonSelector,inactiveButtonClass) => {
   const buttonElement = formElement.querySelector(submitButtonSelector);
 
-  if (hasInvalidInput(inputList)) {
+  if (hasInvalidInput(inputList) || hasNotInputValues(inputList)) {
     disableSubmitButton(buttonElement, inactiveButtonClass);
   } else {
     enableSubmitButton(buttonElement, inactiveButtonClass);
@@ -63,6 +70,7 @@ const setEventListeners = (formElement,inputSelector,submitButtonSelector, input
         toggleButtonState(formElement,inputList,submitButtonSelector,inactiveButtonClass);
       });
    });
+    toggleButtonState(formElement,inputList,submitButtonSelector,inactiveButtonClass);
 };
 
 //Функция валидации форм
@@ -78,7 +86,7 @@ enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__field',
   submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
+  inactiveButtonClass: 'popup__button_invalid',
+  inputErrorClass: 'popup__field_type_error',
+  errorClass: 'error_visible'
 });

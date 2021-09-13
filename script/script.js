@@ -148,7 +148,15 @@ document.addEventListener ('keydown', function(evt) {
     closePopup(document.querySelector('.popup_opened'));
     }
   })
-
+// закрытие popup на клик вне его
+const closestOverlay = document.querySelectorAll('.popup');
+closestOverlay.forEach(pop => {
+  pop.addEventListener('click', () => {
+    if (event.target.classList.contains('popup_opened')) {
+      closePopup(event.target)
+    }
+  })
+})
 
 
 openPopupProfileButton.addEventListener('click', () => openProfilePopup(popupProfile));
@@ -162,3 +170,5 @@ formElementProfile.addEventListener('submit', formSubmitHandler);
 formElementAddCard.addEventListener('submit', formSubmitCard);
 // Обработчики кликов на карточку
 popupCloseBigImg.addEventListener('click', () => closePopup(popupBigImg));
+
+
