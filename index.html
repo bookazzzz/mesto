@@ -52,12 +52,22 @@
                   class="popup__field popup__field_type_name"
                   type="text"
                   name="fieldone"
+                  minlength="2"
+                  maxlength="40"
+                  required
+                  id="user-name"
                 />
+                <span id="user-name-error" class="error"></span>
                 <input
                   class="popup__field popup__field_type_jobs"
                   type="text"
                   name="fieldtwo"
+                  minlength="2"
+                  maxlength="200"
+                  required
+                  id="about"
                 />
+                <span id="about-error" class="error"></span>
                 <button class="popup__button" type="submit">Сохранить</button>
               </form>
             </div>
@@ -73,13 +83,22 @@
                 type="text"
                 name="card_name_field"
                 placeholder="Название"
+                minlength="2"
+                maxlength="30"
+                required
+                id="name-card"
               />
+              <span id="name-card-error" class="error"></span>
               <input
                 class="popup__field popup__field_type_card-link"
                 type="text"
                 name="card_link_field"
                 placeholder="Ссылка на картинку"
+                minlength="2"
+                required
+                id="link"
               />
+              <span id="link-error" class="error"></span>
               <button class="popup__button" type="submit">Сохранить</button>
             </form>
           </div>
@@ -99,5 +118,6 @@
       </footer>
     </div>
     <script src="./script/script.js"></script>
+    <script src="./script/validate.js"></script>
   </body>
 </html>

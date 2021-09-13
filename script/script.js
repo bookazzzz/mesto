@@ -19,6 +19,8 @@ const popupCloseBigImg = document.querySelector('.popup__close_type_big-image');
 const hearts = document.querySelectorAll('.element__heart');
 const cardContainer = document.querySelector('.elements');
 
+
+
 //Функция открытия и закрытия popup
 const openPopup = popup => {
   popup.classList.add('popup_opened')
@@ -34,6 +36,8 @@ const openProfilePopup = popup => {
   popupInputName.value = nameProfile.textContent;
   popupInputJobs.value = jobProfile.textContent;
 }
+
+
 
 //обработчик клика для карточки
 function elementClickHandler(event) {
@@ -137,6 +141,15 @@ initialCards.forEach((card) => {
   cardImage.addEventListener('click', elementClickHandler)
   cardContainer.prepend(cardElement);
 });
+
+// закрытие popup на esc
+document.addEventListener ('keydown', function(evt) {
+  if(evt.keyCode == 27) {
+    closePopup(document.querySelector('.popup_opened'));
+    }
+  })
+
+
 
 openPopupProfileButton.addEventListener('click', () => openProfilePopup(popupProfile));
 closePopupProfileButton.addEventListener('click', () => closePopup(popupProfile));
