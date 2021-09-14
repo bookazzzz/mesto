@@ -31,7 +31,6 @@ const openPopup = popup => {
 const closePopup = popup => {
   popup.classList.remove('popup_opened')
   document.removeEventListener('keydown', closeByEscape);
-  // document.querySelector('.popup__button').classList.add('popup__button_invalid');
 }
 
 // Открытие попапа profile
@@ -67,6 +66,7 @@ function formSubmitHandler(evt) {
     nameProfile.textContent = popupInputName.value;
     jobProfile.textContent = popupInputJobs.value;
     closePopup (popupProfile);
+    evt.target.querySelector('.popup__button').classList.add('popup__button_invalid')
 }
 
 //создание карточки
