@@ -80,13 +80,3 @@ const enableValidation = (config) => {
     setEventListeners(formElement,config.inputSelector,config.submitButtonSelector,config.inputErrorClass,config.errorClass,config.inactiveButtonClass);
    });
 };
-
-
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_invalid',
-  inputErrorClass: 'popup__field_type_error',
-  errorClass: 'error_visible'
-});

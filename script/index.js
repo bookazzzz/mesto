@@ -16,21 +16,25 @@ const formElementAddCard = document.querySelector('.popup__form_type_add-card')
 const popupBigImg = document.querySelector('.popup_big-size-image');
 const popupCloseBigImg = document.querySelector('.popup__close_type_big-image');
 //лайки и контейнер
-const hearts = document.querySelectorAll('.element__heart');
+// const hearts = document.querySelectorAll('.element__heart');
 const cardContainer = document.querySelector('.elements');
+const openedPopup = document.querySelector('.popup_opened')
 
 
 
 //Функция открытия и закрытия popup
 const openPopup = popup => {
   popup.classList.add('popup_opened')
+  document.addEventListener('keydown', closeByEscape);
 }
 
 const closePopup = popup => {
   popup.classList.remove('popup_opened')
+  document.removeEventListener('keydown', closeByEscape);
+  // document.querySelector('.popup__button').classList.add('popup__button_invalid');
 }
 
-// Открытие и закрытие попапа profile
+// Открытие попапа profile
 const openProfilePopup = popup => {
   openPopup(popup)
   popupInputName.value = nameProfile.textContent;
@@ -49,13 +53,13 @@ function elementClickHandler(event) {
 }
 
 // Реализация постановки лайков.
-function heartFillToggle(event) {
-    event.target.classList.toggle('element__heart_fill');
+// function heartFillToggle(event) {
+//     event.target.classList.toggle('element__heart_fill');
 
-    for (let i = 0; i <hearts.length; i++) {
-    hearts[i].addEventListener('click', heartFillToggle);
-  }
-}
+//     for (let i = 0; i <hearts.length; i++) {
+//     hearts[i].addEventListener('click', heartFillToggle);
+//   }
+// }
 
 // Отправка формы редактирования профиля
 function formSubmitHandler(evt) {
@@ -71,6 +75,7 @@ function createCard(imageValue, nameValue) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
   const cardImage = cardElement.querySelector('.element__image');
   cardImage.src = imageValue;
+  cardImage.alt = nameValue;
   cardElement.querySelector('.element__name').textContent = nameValue;
   cardElement.querySelector('.element__heart').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__heart_fill');
@@ -96,6 +101,7 @@ function formSubmitCard(evt) {
   image.value = '';
   name.value = '';
   closePopup (popupAddCard);
+  evt.target.querySelector('.popup__button').classList.add('popup__button_invalid')
 }
 
 // Массив с карточками
@@ -127,37 +133,39 @@ const initialCards = [
 ];
 //загрузка карточек из массива
 initialCards.forEach((card) => {
-  const cardTemplate = document.querySelector('#element-template').content;
-  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+  const cardElement = createCard(card.link, card.name);
   const cardImage = cardElement.querySelector('.element__image');
   cardImage.src = card.link;
-  cardElement.querySelector('.element__name').textContent = card.name;
-  cardElement.querySelector('.element__heart').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__heart_fill');
-  });
-  cardElement.querySelector('.element__delete').addEventListener('click', function (evt) {
-    evt.target.closest('.element').remove();
-  });
-  cardImage.addEventListener('click', elementClickHandler)
   cardContainer.prepend(cardElement);
 });
 
 // закрытие popup на esc
-document.addEventListener ('keydown', function(evt) {
-  if(evt.keyCode == 27) {
-    closePopup(document.querySelector('.popup_opened'));
-    }
-  })
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened')
+    closePopup(openedPopup);
+  }
+}
 // закрытие popup на клик вне его
-const closestOverlay = document.querySelectorAll('.popup');
-closestOverlay.forEach(pop => {
-  pop.addEventListener('click', () => {
+const popupList = document.querySelectorAll('.popup');
+popupList.forEach(pop => {
+  pop.addEventListener('click', (event) => {
     if (event.target.classList.contains('popup_opened')) {
       closePopup(event.target)
     }
   })
 })
 
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_invalid',
+  inputErrorClass: 'popup__field_type_error',
+  errorClass: 'error_visible'
+};
+
+enableValidation(validationConfig);
 
 openPopupProfileButton.addEventListener('click', () => openProfilePopup(popupProfile));
 closePopupProfileButton.addEventListener('click', () => closePopup(popupProfile));
