@@ -66,7 +66,9 @@ function formSubmitHandler(evt) {
     nameProfile.textContent = popupInputName.value;
     jobProfile.textContent = popupInputJobs.value;
     closePopup (popupProfile);
-    evt.target.querySelector('.popup__button').classList.add('popup__button_invalid')
+    const submitButton = evt.target.querySelector('.popup__button')
+    submitButton.classList.add('popup__button_invalid')
+    submitButton.disabled = true
 }
 
 //создание карточки
@@ -101,7 +103,9 @@ function formSubmitCard(evt) {
   image.value = '';
   name.value = '';
   closePopup (popupAddCard);
-  evt.target.querySelector('.popup__button').classList.add('popup__button_invalid')
+  const submitButton = evt.target.querySelector('.popup__button')
+  submitButton.classList.add('popup__button_invalid')
+  submitButton.disabled = true
 }
 
 // Массив с карточками
@@ -134,8 +138,6 @@ const initialCards = [
 //загрузка карточек из массива
 initialCards.forEach((card) => {
   const cardElement = createCard(card.link, card.name);
-  const cardImage = cardElement.querySelector('.element__image');
-  cardImage.src = card.link;
   cardContainer.prepend(cardElement);
 });
 

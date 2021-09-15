@@ -40,10 +40,12 @@ const hasInvalidInput = (inputList) => {
 //Выключение кнопки
 const disableSubmitButton = (buttonElement,inactiveButtonClass) => {
    buttonElement.classList.add(inactiveButtonClass);
+   buttonElement.disabled = true
 };
 //Включение кнопки
 const enableSubmitButton = (buttonElement,inactiveButtonClass) => {
   buttonElement.classList.remove(inactiveButtonClass);
+  buttonElement.disabled = false
 };
 // Проверка кнопки сабмита и переключение состояния кнопки
 const toggleButtonState = (formElement,inputList, submitButtonSelector,inactiveButtonClass) => {
