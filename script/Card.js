@@ -1,78 +1,36 @@
-import {
-  elementTemplate,
-  popupViewerImage,
-  popupViewerTitle,
-  popupImage,
-  openPopup,
-} from "./utilities.js";
-
-export default class Card {
-  constructor(data, selector) {
-    this._text = data.name;
-    this._image = data.link;
-    this._selector = selector;
+export class Card {
+  constructor(name, link, cardSelector, elementClickHandler) {
+      this._name = name;
+      this._link = link;
+      this._cardSelector = cardSelector;
+      this._elementClickHandler = elementClickHandler;
   }
-
-  _getElement() {
-    const cardElement = elementTemplate.querySelector(this._selector).cloneNode(true);
-
-    return cardElement;
+  _getTemplate() {
+      return document.querySelector(this._cardSelector).content.querySelector('.element').cloneNode(true);
   }
-
-  generate() {
-    this._element = this._getElement();
-    this._likeSetEventListeners();
-    this._imageSetEventListeners();
-    this._deleteSetEventListeners();
-
-    this._element.querySelector(".element__image").src = this._image;
-    this._element.querySelector(".element__image").alt = this._text;
-    this._element.querySelector(".element__name").textContent = this._text;
-
-    return this._element;
+  generateCard() {
+      this._element = this._getTemplate();
+      this._element.querySelector('.element__image').alt = this._name;
+      this._element.querySelector('.element__image').src = this._link;
+      this._element.querySelector('.element__name').textContent = this._name;
+      this._setEventListeners();
+      return this._element;
   }
-
-  _imageSetEventListeners() {
-    this._element
-      .querySelector(".element__image")
-      .addEventListener("click", () => {
-        this._handleOpenPopupImage();
-      });
-  }
-
-  _handleOpenPopupImage() {
-    popupViewerImage.src = this._image;
-    popupViewerImage.alt = this._text;
-    popupViewerTitle.textContent = this._text;
-    openPopup(popupImage);
-  }
-
-  _deleteSetEventListeners() {
-    this._element
-      .querySelector(".element__delete")
-      .addEventListener("click", () => {
-        this._handleDeleteImage();
-      });
-  }
-
-  _handleDeleteImage() {
-    if (this._element.closest(".element")) {
+  _deleteCard() {
       this._element.remove();
       this._element = null;
-    }
   }
-
-  _likeSetEventListeners() {
-    this._element
-      .querySelector(".element__heart")
-      .addEventListener("click", () => {
-        this._likeHandleClick();
+  _likeCard() {
+      const buttonLike = this._element.querySelector('.element__heart');
+      buttonLike.classList.toggle('element__heart_fill');
+  }
+  _setEventListeners() {
+      this._element.querySelector('.element__heart').addEventListener('click', () => {
+          this._likeCard()
       });
-  }
-
-  _likeHandleClick() {
-    this._element
-      .querySelector(".element__heart")
-      .classList.toggle("element__heart_fill");
+      this._element.querySelector('.element__delete').addEventListener('click', () => {
+          this._deleteCard()
+      });
+      this._element.querySelector('.element__image').addEventListener('click', this._elementClickHandler);
   }
 }
