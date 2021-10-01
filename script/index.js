@@ -87,13 +87,17 @@ const initialCards = [
   }
 ];
 
-function renderCard(name, link, cardSelector, elementClickHandler) {
-  const card = new Card(name, link,  '#element-template', elementClickHandler);
+function renderCard(name, link) {
+  const card = createCard(name, link)
   cardContainer.prepend(card.generateCard());
 }
 
+function createCard(name, link) {
+  return new Card(name, link,  '#element-template', elementClickHandler);
+}
+
 function renderInitialCards() {
-  initialCards.forEach((card) => renderCard(card.name, card.link,  '#element-template', elementClickHandler))
+  initialCards.forEach((card) => renderCard(card.name, card.link))
 }
 
 renderInitialCards();
@@ -101,7 +105,7 @@ renderInitialCards();
 function elementClickHandler(event) {
   const imgSrc = event.target.src;
   const nameImg = event.target.parentNode.textContent
-  openPopup(popupBigImg);
+  openPopup(popupImage);
   document.querySelector('.popup__big-img').src = imgSrc;
   document.querySelector('.popup__name-big-img').textContent = nameImg;
 }
