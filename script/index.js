@@ -1,17 +1,12 @@
-// Импорт Открытия и закрытия popup
-import {
-  popupViewerImage,
-  popupViewerTitle,
-  popupImage,
-  openPopup,
-  closePopup
-}from "./utilities.js";
-
 //Импорт создания карточки
 import { Card } from './Card.js';
-
+import Section from './Section.js'
+import {
+  initialCards
+} from './Settings.js'
 //Импорт валидации
 import FormValidator from "./FormValidator.js";
+import PopupWithImage from './PopupWithImage.js'
 
 //попап редактирования профиля
 const openPopupProfileButton = document.querySelector('.profile__edit');
@@ -31,6 +26,52 @@ const formElementAddCard = document.querySelector('.popup__form_type_add-card')
 const popupCloseBigImg = document.querySelector('.popup__close_type_big-image');
 const cardContainer = document.querySelector('.elements');
 const openedPopup = document.querySelector('.popup_opened')
+
+
+
+
+//отрисовываем элементы на странице
+const section = new Section ({
+  items: initialCards,
+  renderer: renderCard
+}, '.elements');
+
+section.renderInitialItems();
+
+//Функция добавляет карточку в DOM
+function renderCard({name, link}) {
+  const card = createCard(name, link)
+  cardContainer.prepend(card.generateCard());
+}
+//Функция создает карточку по шаблону
+function createCard(name, link) {
+  return new Card(name, link,  '#element-template', elementClickHandler);
+}
+
+//создаём попап с картинкой
+const popupWithImage = new PopupWithImage('.popup_big-size-image')
+popupWithImage.setEventListeners()
+//функция открытия попапа с картинкой
+function elementClickHandler() {
+  popupWithImage.open(this._name, this._link);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Открытие попапа profile
 const openProfilePopup = popup => {
@@ -59,57 +100,6 @@ function formSubmitCard(evt) {
   validformSubmitCard.toggleButtonState();
 }
 
-// Массив с карточками
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-function renderCard(name, link) {
-  const card = createCard(name, link)
-  cardContainer.prepend(card.generateCard());
-}
-
-function createCard(name, link) {
-  return new Card(name, link,  '#element-template', elementClickHandler);
-}
-
-function renderInitialCards() {
-  initialCards.forEach((card) => renderCard(card.name, card.link))
-}
-
-renderInitialCards();
-
-function elementClickHandler(event) {
-  const imgSrc = event.target.src;
-  const nameImg = event.target.parentNode.textContent
-  openPopup(popupImage);
-  document.querySelector('.popup__big-img').src = imgSrc;
-  document.querySelector('.popup__name-big-img').textContent = nameImg;
-}
-
 const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__field',
@@ -135,4 +125,4 @@ formElementProfile.addEventListener('submit', formSubmitHandler);
 // Обработчики кликов на кнопку отправки формы добавления карточки
 formElementAddCard.addEventListener('submit', formSubmitCard);
 // Обработчики кликов на карточку
-popupCloseBigImg.addEventListener('click', () => closePopup(popupImage));
+// popupCloseBigImg.addEventListener('click', () => closePopup(popupImage));
