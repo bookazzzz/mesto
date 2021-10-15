@@ -1,6 +1,7 @@
 import {
   openPopupProfileButton,
-  cardContainer
+  cardContainer,
+  openPopupAddCardButton
 } from './constants.js'
 
 //Импорт создания карточки
@@ -75,29 +76,66 @@ const userInfo = new UserInfo({
 });
 
 //Создаем попап формы редактирования профиля
-const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', editProfileFormSubmit);
+const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
+  userInfo.setUserInfo(data);
+});
 
 popupWithFormEditProfile.setEventListeners();
 
 // Отправка формы редактирования профиля
-function editProfileFormSubmit(dataUser) {
-  userInfo.setUserInfo(dataUser)
-
-  popupWithFormEditProfile.close();
+const editProfileFormSubmit = () => {
+  const data = userInfo.getUserInfo()
+  for (let key in data) {
+    popupWithFormEditProfile.form.elements[key].value = data[key]
+  }
+  validFormProfile.toggleButtonState();
+  popupWithFormEditProfile.open()
 }
 
-function editProfileButton() {
-  popupWithFormEditProfile.setEventListeners(userInfo.getUserInfo() );
+// function editProfileButton() {
+//   popupWithFormEditProfile.setEventListeners(userInfo.getUserInfo() );
 
-  popupWithFormEditProfile.open();
-}
+//   popupWithFormEditProfile.open();
+// }
 
 //валидация формы редактирования профиля
 const validFormProfile = new FormValidator(validationConfig, popupWithFormEditProfile.form)
 validFormProfile.enableValidation()
 
 //слушатель клика по кнокпи редактирования профиля
-openPopupProfileButton.addEventListener('click', editProfileButton)
+openPopupProfileButton.addEventListener('click', editProfileFormSubmit)
+
+//================= Popup добавления карточки ============================
+
+const popupWithFormCard = new PopupWithForm('.popup_type_add-card',
+
+  ({ card_name_field, card_link_field }) => {
+    const data = {
+      name: card_name_field,
+      link: card_link_field
+    };
+    section.addItem(renderCard(data))
+  });
+
+popupWithFormCard.setEventListeners()
+
+//слушатель клика по кнопке добавления карточки
+
+openPopupAddCardButton.addEventListener('click', () => {
+  popupWithFormCard.open();
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
