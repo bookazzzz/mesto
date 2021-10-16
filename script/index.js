@@ -65,6 +65,7 @@ popupWithFormEditProfile.setEventListeners();
 const editProfileFormSubmit = () => {
   const data = userInfo.getUserInfo()
   validFormProfile.toggleButtonState();
+  validFormProfile.resetValidation();
   for (let key in data) {
     popupWithFormEditProfile.form.elements[key].value = data[key]
   }
@@ -92,6 +93,7 @@ popupWithFormCard.setEventListeners()
 
 openPopupAddCardButton.addEventListener('click', () => {
   validFormCard.toggleButtonState();
+  validFormCard.resetValidation();
   popupWithFormCard.open();
 })
 
