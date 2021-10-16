@@ -1,12 +1,11 @@
 import Popup from "./Popup.js";
 export default class PopupWithForm extends Popup {
-  constructor (popupSelector, formSubmit, formValidator) {
+  constructor (popupSelector, formSubmit) {
     super (popupSelector)
 
     this._formSubmit = formSubmit;
     this.form = this._popup.querySelector('.popup__form');
     this._formInputs = Array.from(this.form.querySelectorAll('.popup__field'));
-    this._formValidator = formValidator;
   }
 
  //Получаем все поля инпутов

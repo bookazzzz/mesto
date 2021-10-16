@@ -11,6 +11,7 @@ import {
   initialCards,
   validationConfig
 } from './Settings.js'
+
 //Импорт валидации
 import FormValidator from "./FormValidator.js";
 import PopupWithImage from './PopupWithImage.js'
@@ -37,6 +38,7 @@ function createCard(name, link) {
 }
 
 //================= Popup большой картинки ============================
+
 //создаём попап с картинкой
 const popupWithImage = new PopupWithImage('.popup_big-size-image')
 popupWithImage.setEventListeners()
@@ -90,7 +92,6 @@ const popupWithFormCard = new PopupWithForm('.popup_type_add-card',
 popupWithFormCard.setEventListeners()
 
 //слушатель клика по кнопке добавления карточки
-
 openPopupAddCardButton.addEventListener('click', () => {
   validFormCard.toggleButtonState();
   validFormCard.resetValidation();
