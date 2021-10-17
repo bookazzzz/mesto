@@ -2,21 +2,21 @@ import {
   openPopupProfileButton,
   cardContainer,
   openPopupAddCardButton
-} from './constants.js'
+} from '../script/constants.js'
 
 //Импорт создания карточки
-import { Card } from './Card.js';
-import Section from './Section.js'
+import { Card } from '../components/Card.js';
+import Section from '../components/Section.js'
 import {
   initialCards,
   validationConfig
-} from './Settings.js'
+} from '../script/Settings.js'
 
 //Импорт валидации
-import FormValidator from "./FormValidator.js";
-import PopupWithImage from './PopupWithImage.js'
-import PopupWithForm from './PopupWithForm.js'
-import UserInfo from './UserInfo.js'
+import FormValidator from "../components/FormValidator.js";
+import PopupWithImage from '../components/PopupWithImage.js'
+import PopupWithForm from '../components/PopupWithForm.js'
+import UserInfo from '../components/UserInfo.js'
 
 //отрисовываем элементы на странице
 const section = new Section ({
