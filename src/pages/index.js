@@ -87,8 +87,8 @@ openPopupProfileButton.addEventListener('click', editProfileFormSubmit)
 
 const popupWithFormCard = new PopupWithForm('.popup_type_add-card',
 
-  ({ card_name_field, card_link_field }) => {
-    section.addItem(createCard(card_name_field, card_link_field))
+  ({ cardNameField, cardLinkField }) => {
+    section.addItem(createCard(cardNameField, cardLinkField))
   });
 
 popupWithFormCard.setEventListeners()
