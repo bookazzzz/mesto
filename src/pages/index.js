@@ -19,7 +19,34 @@ import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/PopupWithForm.js'
 import UserInfo from '../components/UserInfo.js'
+import Api from "../components/Api.js"
 
+// ========================== ПР 9 ====================================================
+
+// Идентефикация
+const api = new Api ({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-29',
+  headers: {
+    authorization: 'f0580056-984e-4f07-9580-70b86980b58c',
+    'Content-Type': 'application/json'
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ============================================================================================
 //отрисовываем элементы на странице
 const section = new Section ({
   items: initialCards,
