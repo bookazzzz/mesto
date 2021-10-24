@@ -5,17 +5,10 @@
   object-fit: cover;
 }
 
-.profile__avatar:before {
-  background-image: url(../../../images/avatar_remove.svg);
-  display: block;
+.profile__avatar:hover {
+  background: transparent center no-repeat url(../../../images/avatar_remove.svg);
+  opacity: 0.6;
   cursor: pointer;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  transition: .4s ease-in-out;
-  opacity: 0;
 }
 
 @media screen and (max-width: 767px) {
