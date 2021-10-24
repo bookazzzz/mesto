@@ -1,7 +1,6 @@
 .element__social {
   display: flex;
-  /* flex-direction: row; */
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   width: 216px;
   justify-content: space-between;
