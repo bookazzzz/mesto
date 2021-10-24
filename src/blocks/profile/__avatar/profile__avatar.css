@@ -5,6 +5,19 @@
   object-fit: cover;
 }
 
+.profile__avatar:before {
+  background-image: url(../../../images/avatar_remove.svg);
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  transition: .4s ease-in-out;
+  opacity: 0;
+}
+
 @media screen and (max-width: 767px) {
   .profile__avatar {
     margin-left: 82px;
