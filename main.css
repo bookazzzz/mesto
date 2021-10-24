@@ -17,7 +17,7 @@
 .element__likes-count{font-size:13px;font-style:normal;font-weight:400;line-height:16px;margin:0;text-align:center}
 .element__delete{background:transparent 50% no-repeat url(images/buttonDelete.2af49b82d305a6ea3442.svg);border:none;height:19px;-o-object-fit:cover;object-fit:cover;position:absolute;right:15px;top:18px;width:18px}.element__delete:hover{cursor:pointer;opacity:.8}
 .element__image{height:282px;-o-object-fit:cover;object-fit:cover;width:282px}
-.element__social{align-items:center;display:flex;flex-direction:row;justify-content:space-between;margin:auto;padding-top:25px;width:216px}
+.element__social{align-items:center;display:flex;flex-direction:column;justify-content:space-between;margin:auto;padding-top:25px;width:216px}
 .element__name{color:#000;font-size:24px;font-weight:900;line-height:29px;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .element__heart{background:transparent 50% no-repeat url(images/heart.1ad06e85f169668a1f36.svg);border:none;height:19px;min-width:22px}.element__heart:hover{cursor:pointer;opacity:.5}
 .element__heart_fill{background:50% no-repeat url(images/Union.35948469632d0421d697.svg)}
