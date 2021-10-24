@@ -5,15 +5,13 @@
   object-fit: cover;
 }
 
-.profile__avatar::before {
+.profile__avatar:before {
   opacity: .8;
   background-color: #000;
   background-image: url('../../../images/avatar_remove.svg');
   background-repeat: no-repeat;
   background-position: center;
   transition: .4s ease-in-out;
-  opacity: 0;
-  display: block;
   cursor: pointer;
   position: absolute;
 }
