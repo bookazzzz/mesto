@@ -55,19 +55,6 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
 
 
-//Попап Удаления карточки
-    const deletePopup = new PopupWithForm('.popup_delete-cofirm', (item, card) => {
-      api.deletePlaceCard(item._id)
-          .then(() => {
-              card._deleteCard();
-              deletePopup.close();
-          })
-          .catch((err) => {
-              console.log(err);
-          })
-  });
-
-
 // ============================================================================================
 //отрисовываем элементы на странице
 const section = new Section ({
@@ -85,6 +72,7 @@ function renderCard({name, link}) {
 //Функция создает карточку по шаблону
 function createCard(name, link) {
   const card = new Card(name, link,  '#element-template', elementClickHandler);
+
   return card.generateCard();
 }
 
@@ -109,9 +97,9 @@ const userInfo = new UserInfo({
 });
 
 //Создаем попап формы редактирования профиля
-const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
+const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (values) => {
   toLoad('.popup_type_profile-edit', true);
-  api.editUserInfo(data)
+  api.editUserInfo(values)
   .then((res) => {
     userInfo.setUserInfo(res);
     popupWithFormEditProfile.close();
