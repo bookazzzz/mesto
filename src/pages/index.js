@@ -44,9 +44,9 @@ const api = new Api ({
 
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-    .then(([userData, initialCards]) => {
-        userInfo.setUserInfo(userData);
-        userId = userData._id;
+    .then(([dataUser, initialCards]) => {
+        userInfo.setUserInfo(dataUser);
+        userId = dataUser._id;
         cardContainer.renderInitialItems(initialCards);
     })
     .catch((err) => {
