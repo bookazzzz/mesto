@@ -33,7 +33,15 @@ const api = new Api ({
 })
 
 
-
+Promise.all([api.getInfoUser(), api.getInitialCards()])
+    .then(([userData, initialCards]) => {
+        userInfo.setUserInfo(userData);
+        userId = userData._id;
+        cardsList.renderItems(initialCards);
+    })
+    .catch((err) => {
+        console.log(err);
+    })
 
 
 
@@ -78,12 +86,20 @@ function elementClickHandler() {
 const userInfo = new UserInfo({
   userName: '.profile__title',
   userJob: '.profile__subtitle',
+  id: id,
   avatarSelector: '.profile__avatar'
 });
 
 //Создаем попап формы редактирования профиля
 const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
-  userInfo.setUserInfo(data);
+  api.editUserInfo(data)
+  .then((res) => {
+    userInfo.setUserInfo(res);
+    popupWithFormEditProfile.close();
+  })
+  .catch((err) => {
+      console.log(err);
+  })
 });
 
 popupWithFormEditProfile.setEventListeners();
@@ -126,3 +142,4 @@ openPopupAddCardButton.addEventListener('click', () => {
 //валидация формы редактирования карточки
 const validFormCard = new FormValidator(validationConfig, popupWithFormCard.form)
 validFormCard.enableValidation()
+
