@@ -25,17 +25,12 @@ import Api from "../components/Api.js"
 
 // Идентефикация
 const api = new Api ({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-29',
+  url: 'https://mesto.nomoreparties.co/v1/cohort-29/',
   headers: {
     authorization: 'f0580056-984e-4f07-9580-70b86980b58c',
     'Content-Type': 'application/json'
   }
 })
-
-
-
-
-
 
 
 
@@ -82,7 +77,8 @@ function elementClickHandler() {
 //Создаем информацию о пользователе
 const userInfo = new UserInfo({
   userName: '.profile__title',
-  userJob: '.profile__subtitle'
+  userJob: '.profile__subtitle',
+  avatarSelector: '.profile__avatar'
 });
 
 //Создаем попап формы редактирования профиля
