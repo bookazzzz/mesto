@@ -55,8 +55,17 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
 
 
-
-
+//Попап Удаления карточки
+    const deletePopup = new PopupWithForm('.popup_delete-cofirm', (item, card) => {
+      api.deletePlaceCard(item._id)
+          .then(() => {
+              card._deleteCard();
+              deletePopup.close();
+          })
+          .catch((err) => {
+              console.log(err);
+          })
+  });
 
 
 // ============================================================================================
