@@ -22,6 +22,16 @@ import UserInfo from '../components/UserInfo.js'
 import Api from "../components/Api.js"
 
 // ========================== ПР 9 ====================================================
+function toLoad(popup, loading) {
+  const saveButton = document.querySelector(popup).querySelector('.popup__button');
+
+  if (loading) {
+    saveLoadingButton.textContent = 'Загрузка…';
+  }
+  else {
+    saveLoadingButton.textContent = 'Сохранить';
+  }
+}
 
 // Идентефикация
 const api = new Api ({
@@ -33,7 +43,7 @@ const api = new Api ({
 })
 
 
-Promise.all([api.getInfoUser(), api.getInitialCards()])
+Promise.all([api.getUserInfo(), api.getInitialCards()])
     .then(([userData, initialCards]) => {
         userInfo.setUserInfo(userData);
         userId = userData._id;
@@ -92,6 +102,7 @@ const userInfo = new UserInfo({
 
 //Создаем попап формы редактирования профиля
 const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
+  toLoad('.popup_type_profile-edit', true);
   api.editUserInfo(data)
   .then((res) => {
     userInfo.setUserInfo(res);
