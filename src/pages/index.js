@@ -96,7 +96,6 @@ function elementClickHandler() {
 const userInfo = new UserInfo({
   userName: '.profile__title',
   userJob: '.profile__subtitle',
-  id: id,
   avatarSelector: '.profile__avatar'
 });
 
