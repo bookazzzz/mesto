@@ -97,9 +97,9 @@ const userInfo = new UserInfo({
 });
 
 //Создаем попап формы редактирования профиля
-const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (values) => {
+const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
   toLoad('.popup_type_profile-edit', true);
-  api.editUserInfo(values)
+  api.editUserInfo(data)
   .then((res) => {
     userInfo.setUserInfo(res);
     popupWithFormEditProfile.close();
