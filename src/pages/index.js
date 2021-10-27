@@ -53,26 +53,14 @@ api
     .catch(err => console.log(`Ошибка загрузки инициирующих данных: ${err}`))
 
 
-    const initialCards = api.getInitialCards()
-    initialCards.then(cards =>  {
-
-      const defaultCardList = new Section({
-      items: cards,
-      renderer: renderCard
-      }, '.elements');
-
-      defaultCardList.renderInitialItems();
-    })
-
-
 // ============================================================================================
-//отрисовываем элементы на странице
-// const section = new Section ({
-//   items: initialCards,
-//   renderer: renderCard
-// }, '.elements');
+// отрисовываем элементы на странице
+const section = new Section ({
+  items: initialCards,
+  renderer: renderCard
+}, '.elements');
 
-// section.renderInitialItems();
+section.renderInitialItems();
 
 //Функция добавляет карточку в DOM
 function renderCard({name, link}) {
@@ -102,16 +90,28 @@ function elementClickHandler() {
 
 
 //Создаем попап формы редактирования профиля
-const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
-  api.editUserInfo(data)
-  .then((res) => {
-    userInfo.setUserInfo(res);
-    popupWithFormEditProfile.close();
-  })
-  .catch((err) => {
-      console.log(err);
-  })
-});
+const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit',
+  (item) => {
+  // userInfoEdit.isLoading(true)
+  api.editUserInfo(item)
+    .then((res) => {
+      userInfo.setUserInfo(res)
+      // userInfoEdit.close()
+    })
+    .catch(err => console.log(`Ошибка обновления пользовательских данных: ${err}`))
+    // .finally(() => {
+    //   userInfoEdit.isLoading(false)
+    });
+
+ // (data) => {
+  // api.editUserInfo(data)
+  // .then((res) => {
+  //   userInfo.setUserInfo(res);
+  //   popupWithFormEditProfile.close();
+  // })
+  // .catch((err) => {
+  //     console.log(err);
+  // })
 
 popupWithFormEditProfile.setEventListeners();
 
