@@ -33,16 +33,41 @@ const api = new Api ({
   }
 })
 
+//Создаем информацию о пользователе
+const userInfo = new UserInfo({
+  nameSelector: '.profile__title',
+  aboutSelector: '.profile__subtitle',
+  avatarSelector: '.profile__avatar'
+});
 
-Promise.all([api.getUserInfo(), api.getInitialCards()])
-    .then(([properties, initialCards]) => {
-        userInfo.setUserInfo(properties);
-        userId = properties._id;
-        cardContainer.renderInitialItems(initialCards);
+
+api
+    .getAppInfo()
+    .then(([ userInfoRes, getInitialCards ]) => {
+        console.log(getInitialCards)
+        userInfo.setUserInfo({
+            name: userInfoRes.name,
+            description: userInfoRes.about,
+            avatar: userInfoRes.avatar
+        })
     })
-    .catch((err) => {
-        console.log(err);
-    })
+    .catch(err => console.log(`Ошибка загрузки инициирующих данных: ${err}`))
+
+
+
+
+
+
+
+// Promise.all([api.getUserInfo(), api.getInitialCards()])
+//     .then(([properties, initialCards]) => {
+//         userInfo.setUserInfo(properties);
+//         userId = properties._id;
+//         cardContainer.renderInitialItems(initialCards);
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     })
 
 
 
@@ -80,12 +105,7 @@ function elementClickHandler() {
 
 //================= Popup профиля ============================
 
-//Создаем информацию о пользователе
-const userInfo = new UserInfo({
-  nameSelector: '.profile__title',
-  aboutSelector: '.profile__subtitle',
-  avatarSelector: '.profile__avatar'
-});
+
 
 //Создаем попап формы редактирования профиля
 const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {

@@ -1,8 +1,13 @@
 export default class Api {
-  constructor(config) {
-    this._url = config.url;
-    this._headers = config.headers;
+  constructor({url, headers}) {
+    this._url = url;
+    this._headers = headers;
   }
+
+  getAppInfo() {
+    return Promise.all([this.getUserInfo(), this.getCardList()])
+}
+
 //получение данных юзера
   getUserInfo() {
     return fetch(`${this._url}users/me`, {
