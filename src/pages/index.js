@@ -53,6 +53,11 @@ api
     })
     .catch(err => console.log(`Ошибка загрузки инициирующих данных: ${err}`))
 
+    api.editAvatar()
+.then( (res) => {
+ profileAvatar.src = res.avatar
+})
+
 
 // ============================================================================================
 //отрисовываем элементы на странице
@@ -142,4 +147,3 @@ openPopupAddCardButton.addEventListener('click', () => {
 //валидация формы редактирования карточки
 const validFormCard = new FormValidator(validationConfig, popupWithFormCard.form)
 validFormCard.enableValidation()
-
