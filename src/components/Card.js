@@ -20,9 +20,9 @@ export class Card {
       image.src = this._link;
       image.alt = this._name;
       this._element.querySelector('.element__name').textContent = this._name;
-      this._likeButtonElement = this._element.querySelector('.element__heart');
-      this._likeCounterElement = this._element.querySelector('.element__likes-count');
-      this._deleteButtonElement = this._element.querySelector('.element__delete');
+      // this._likeButtonElement = this._element.querySelector('.element__heart');
+      // this._likeCounterElement = this._element.querySelector('.element__likes-count');
+      // this._deleteButtonElement = this._element.querySelector('.element__delete');
       this._setEventListeners();
       return this._element;
   }
