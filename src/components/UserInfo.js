@@ -6,8 +6,8 @@
 
   constructor ({nameSelector, aboutSelector, avatarSelector}) {
     this._userName = document.querySelector(nameSelector);
-    this._userAvatar = document.querySelector(aboutSelector);
-    this._userAbout = document.querySelector(avatarSelector);
+    this._userAbout = document.querySelector(aboutSelector);
+    this._userAvatar = document.querySelector(avatarSelector);
   }
 
   getUserInfo() {
