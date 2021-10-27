@@ -10,7 +10,6 @@ import {
 import { Card } from '../components/Card.js';
 import Section from '../components/Section.js'
 import {
-  initialCards,
   validationConfig
 } from '../script/Settings.js'
 
@@ -54,31 +53,26 @@ api
     .catch(err => console.log(`Ошибка загрузки инициирующих данных: ${err}`))
 
 
+    const initialCards = api.getInitialCards()
+    initialCards.then(cards =>  {
 
+      const defaultCardList = new Section({
+      items: cards,
+      renderer: renderCard
+      }, '.elements');
 
-
-
-
-// Promise.all([api.getUserInfo(), api.getInitialCards()])
-//     .then(([properties, initialCards]) => {
-//         userInfo.setUserInfo(properties);
-//         userId = properties._id;
-//         cardContainer.renderInitialItems(initialCards);
-//     })
-//     .catch((err) => {
-//         console.log(err);
-//     })
-
+      defaultCardList.renderInitialItems();
+    })
 
 
 // ============================================================================================
 //отрисовываем элементы на странице
-const section = new Section ({
-  items: initialCards,
-  renderer: renderCard
-}, '.elements');
+// const section = new Section ({
+//   items: initialCards,
+//   renderer: renderCard
+// }, '.elements');
 
-section.renderInitialItems();
+// section.renderInitialItems();
 
 //Функция добавляет карточку в DOM
 function renderCard({name, link}) {
