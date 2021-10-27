@@ -47,21 +47,15 @@ api
         console.log(getInitialCards)
         userInfo.setUserInfo({
             name: userInfoRes.name,
-            about: userInfoRes.about,
+            description: userInfoRes.about,
             avatar: userInfoRes.avatar
         })
     })
     .catch(err => console.log(`Ошибка загрузки инициирующих данных: ${err}`))
 
-api.editAvatar()
-  .then( (res) => {
-    userAvatar.src = res.avatar
-})
- .catch(err => console.log(`Ошибка загрузки аватара: ${err}`))
-
 
 // ============================================================================================
-// отрисовываем элементы на странице
+//отрисовываем элементы на странице
 const section = new Section ({
   items: initialCards,
   renderer: renderCard
@@ -97,28 +91,16 @@ function elementClickHandler() {
 
 
 //Создаем попап формы редактирования профиля
-const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit',
-  (item) => {
-  // userInfoEdit.isLoading(true)
-  api.editUserInfo(item)
-    .then((res) => {
-      userInfo.setUserInfo(res)
-      // userInfoEdit.close()
-    })
-    .catch(err => console.log(`Ошибка обновления пользовательских данных: ${err}`))
-    // .finally(() => {
-    //   userInfoEdit.isLoading(false)
-    });
-
- // (data) => {
-  // api.editUserInfo(data)
-  // .then((res) => {
-  //   userInfo.setUserInfo(res);
-  //   popupWithFormEditProfile.close();
-  // })
-  // .catch((err) => {
-  //     console.log(err);
-  // })
+const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
+  api.editUserInfo(data)
+  .then((res) => {
+    userInfo.setUserInfo(res);
+    popupWithFormEditProfile.close();
+  })
+  .catch((err) => {
+      console.log(err);
+  })
+});
 
 popupWithFormEditProfile.setEventListeners();
 
