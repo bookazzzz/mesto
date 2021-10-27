@@ -5,7 +5,7 @@ export default class Api {
   }
 
   getAppInfo() {
-    return Promise.all([this.getUserInfo(), this.getCardList()])
+    return Promise.all([this.getUserInfo(), this.getInitialCards()])
 }
 
 //получение данных юзера
