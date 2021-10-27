@@ -82,8 +82,8 @@ function elementClickHandler() {
 
 //Создаем информацию о пользователе
 const userInfo = new UserInfo({
-  userName: '.profile__title',
-  userJob: '.profile__subtitle',
+  nameSelector: '.profile__title',
+  aboutSelector: '.profile__subtitle',
   avatarSelector: '.profile__avatar'
 });
 
