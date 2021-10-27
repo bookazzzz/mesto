@@ -1,5 +1,5 @@
 export class Card {
-  constructor(name, link, owner, _id, likes, currentUserId, cardSelector, elementClickHandler) {
+  constructor(name, link, cardSelector, elementClickHandler) {
       this._name = name;
       this._link = link;
 
@@ -47,13 +47,13 @@ export class Card {
       this._element.querySelector('.element__image').addEventListener('click', this._elementClickHandler.bind(this));
   }
 
-setCardInfo({_id, name, link, likes}) {
-    this._name = name;
-    this.link = link;
-    this._id = _id;
-    this.setLikes(likes);
-    this._updateViewsCard();
-  }
+// setCardInfo({_id, name, link, likes}) {
+//     this._name = name;
+//     this.link = link;
+//     this._id = _id;
+//     this.setLikes(likes);
+//     this._updateViewsCard();
+//   }
 
 
 }
