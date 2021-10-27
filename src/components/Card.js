@@ -3,10 +3,10 @@ export class Card {
       this._name = name;
       this._link = link;
 
-      this._owner = owner;
-      this._id = _id;
-      this._likes = likes;
-      this._currentUserId = currentUserId;
+      // this._owner = owner;
+      // this._id = _id;
+      // this._likes = likes;
+      // this._currentUserId = currentUserId;
 
       this._cardSelector = cardSelector;
       this._elementClickHandler = elementClickHandler;
