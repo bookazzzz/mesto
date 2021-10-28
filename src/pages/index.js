@@ -47,7 +47,7 @@ api
         console.log(getInitialCards)
         userInfo.setUserInfo({
             name: userInfoRes.name,
-            description: userInfoRes.about,
+            about: userInfoRes.about,
             avatar: userInfoRes.avatar
         })
     })
