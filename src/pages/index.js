@@ -42,14 +42,15 @@ const api = new Api ({
 //
 
   api.getAppInfo()
-    .then(([ userInfoRes, getInitialCards ]) => {
-
-      userInfo.setUserInfo({
-            name: userInfoRes.name,
-            about: userInfoRes.about,
-            avatar: userInfoRes.avatar
-        })
-
+    .then(([ userData, getInitialCards ]) => {
+     const { name, about, avatar, _id } = userData
+      // userInfo.setUserInfo({
+      //       name: userInfoRes.name,
+      //       about: userInfoRes.about,
+      //   })
+      userInfo.setUserInfo({ textName: name, textJob: about})
+      userInfo.setAvatar(avatar)
+      userId = _id
       section.renderInitialItems(getInitialCards)
 
     })
