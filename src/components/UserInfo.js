@@ -15,10 +15,10 @@
   setUserInfo({ name, about}) {
     if (name) this._userName.textContent = name;
     if (about) this._userAbout.textContent = about;
-    // if (avatar) this._userAvatar.src = url;
+    if (avatar) this._userAvatar.src = avatar;
   }
 
-  setAvatar({avatar}) {
-    this._userAvatar.src = avatar;
-  }
+  // setAvatar({avatar}) {
+  //   this._userAvatar.src = avatar;
+  // }
 }

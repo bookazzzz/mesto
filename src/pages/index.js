@@ -43,63 +43,26 @@ const api = new Api ({
 
 
   api.getAppInfo()
-    .then(( userData) => {
+    .then(([ userData, getInitialCards ]) => {
 
       // userInfo.setUserInfo({
       //       name: userInfoRes.name,
       //       about: userInfoRes.about,
       //   })
-      userInfo.setUserInfo({name:userData.name, about:userData.about})
-      userInfo.setAvatar({avatar:userData.avatar})
-      api.getInitialCards()
-      .then(arrayCards => {
-        section.renderInitialItems(arrayCards);
-      })
-      .catch(err => {
-        console.error(err);
-      })
+      userInfo.setUserInfo({name:userData.name, about:userData.about, avatar:userData.avatar})
+      section.renderInitialItems(getInitialCards)
+
     })
     .catch(err => console.log(`Ошибка загрузки инициирующих данных: ${err}`))
 
-//Не работает ошибка
-
-    // api.editAvatar()
-    // .then( (res) => {
-    //   avatarSelector.src = res.avatar
-    // })
-    // .catch(err => console.log(`Ошибка загрузки аватарки: ${err}`))
-
-
-//Создаем попап формы редактирования профиля
-const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
-  api.editUserInfo(data)
-  .then((res) => {
-    userInfo.setUserInfo(res);
-    popupWithFormEditProfile.close();
-  })
-  .catch((err) => {
-      console.log(err);
-  })
-});
-
-popupWithFormEditProfile.setEventListeners();
-
 
 // ============================================================================================
-const section = new Section ({
-  renderer: (item) => {
-    const cardElement = createCard(item);
-    const cardLikesCount = cardElement.querySelector('.element__likes-count');
-    cardLikesCount.textContent = item.likes.length;
-    section.addItem(cardElement, "prepend")
-  }
-}, '.elements');
-
 //отрисовываем элементы на странице
-// const section = new Section ({
-//   items: initialCards,
-//   renderer: renderCard
-// }, '.elements');
+const section = new Section ({
+  items: api.getInitialCards,
+  // items: initialCards,
+  renderer: renderCard
+}, '.elements');
 
 // section.renderInitialItems();
 
