@@ -50,7 +50,6 @@ const api = new Api ({
       //   })
       userInfo.setUserInfo({ textName: name, textJob: about})
       userInfo.setAvatar(avatar)
-      userId = _id
       section.renderInitialItems(getInitialCards)
 
     })
@@ -60,7 +59,7 @@ const api = new Api ({
 
     api.editAvatar()
     .then( (res) => {
-      userAvatar.src = res.avatar
+      avatarSelector.src = res.avatar
     })
     .catch(err => console.log(`Ошибка загрузки аватарки: ${err}`))
 
