@@ -50,7 +50,7 @@ const api = new Api ({
       //       about: userInfoRes.about,
       //   })
       userInfo.setUserInfo({name:userData.name, about:userData.about, avatar:userData.avatar})
-      section.renderInitialItems(getInitialCards)
+      console.log(getInitialCards)
 
     })
     .catch(err => console.log(`Ошибка загрузки инициирующих данных: ${err}`))
