@@ -10,7 +10,7 @@ import {
 import { Card } from '../components/Card.js';
 import Section from '../components/Section.js'
 import {
-  initialCards,
+  // initialCards,
   validationConfig
 } from '../script/Settings.js'
 
@@ -82,7 +82,8 @@ popupWithFormEditProfile.setEventListeners();
 // ============================================================================================
 //отрисовываем элементы на странице
 const section = new Section ({
-  items: initialCards,
+  items: api.getInitialCards,
+  // items: initialCards,
   renderer: renderCard
 }, '.elements');
 
