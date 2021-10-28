@@ -15,6 +15,6 @@
   setUserInfo({ name, about, avatar }) {
     if (name) this._userName.textContent = name;
     if (about) this._userAbout.textContent = about;
-    if (avatar) this._userAvatar.src = `url('${avatar}')`;
+    if (avatar) this._userAvatar.src = url;
   }
 }
