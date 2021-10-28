@@ -43,12 +43,12 @@ const api = new Api ({
 
   api.getAppInfo()
     .then(([ userData, getInitialCards ]) => {
-     const { name, about, avatar} = userData
+
       // userInfo.setUserInfo({
       //       name: userInfoRes.name,
       //       about: userInfoRes.about,
       //   })
-      userInfo.setUserInfo({userData:name, userData:about})
+      userInfo.setUserInfo({name:userData.name, about:userData.about})
       userInfo.setAvatar(avatar)
       section.renderInitialItems(getInitialCards)
 
