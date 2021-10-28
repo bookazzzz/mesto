@@ -49,7 +49,7 @@ const api = new Api ({
       //       about: userInfoRes.about,
       //   })
       userInfo.setUserInfo({name:userData.name, about:userData.about})
-      userInfo.setAvatar(avatar)
+      userInfo.setAvatar(userData.avatar)
       section.renderInitialItems(getInitialCards)
 
     })
@@ -57,12 +57,26 @@ const api = new Api ({
 
 //Не работает ошибка
 
-    api.editAvatar()
-    .then( (res) => {
-      avatarSelector.src = res.avatar
-    })
-    .catch(err => console.log(`Ошибка загрузки аватарки: ${err}`))
+    // api.editAvatar()
+    // .then( (res) => {
+    //   avatarSelector.src = res.avatar
+    // })
+    // .catch(err => console.log(`Ошибка загрузки аватарки: ${err}`))
 
+
+//Создаем попап формы редактирования профиля
+const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
+  api.editUserInfo(data)
+  .then((res) => {
+    userInfo.setUserInfo(res);
+    popupWithFormEditProfile.close();
+  })
+  .catch((err) => {
+      console.log(err);
+  })
+});
+
+popupWithFormEditProfile.setEventListeners();
 
 
 // ============================================================================================
@@ -101,19 +115,19 @@ function elementClickHandler() {
 
 
 
-//Создаем попап формы редактирования профиля
-const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
-  api.editUserInfo(data)
-  .then((res) => {
-    userInfo.setUserInfo(res);
-    popupWithFormEditProfile.close();
-  })
-  .catch((err) => {
-      console.log(err);
-  })
-});
+// //Создаем попап формы редактирования профиля
+// const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
+//   api.editUserInfo(data)
+//   .then((res) => {
+//     userInfo.setUserInfo(res);
+//     popupWithFormEditProfile.close();
+//   })
+//   .catch((err) => {
+//       console.log(err);
+//   })
+// });
 
-popupWithFormEditProfile.setEventListeners();
+// popupWithFormEditProfile.setEventListeners();
 
 // Отправка формы редактирования профиля
 const editProfileFormSubmit = () => {
