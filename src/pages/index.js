@@ -34,30 +34,36 @@ const api = new Api ({
 })
 
 //Создаем информацию о пользователе
-const userInfo = new UserInfo({
+ const userInfo = new UserInfo({
   nameSelector: '.profile__title',
   aboutSelector: '.profile__subtitle',
   avatarSelector: '.profile__avatar'
-});
+ });
+//
 
-
-api
-    .getAppInfo()
+  api.getAppInfo()
     .then(([ userInfoRes, getInitialCards ]) => {
-        console.log(getInitialCards)
-        userInfo.setUserInfo({
+
+      userInfo.setUserInfo({
             name: userInfoRes.name,
             about: userInfoRes.about,
             avatar: userInfoRes.avatar
         })
+
+      section.renderInitialItems(getInitialCards)
+
     })
     .catch(err => console.log(`Ошибка загрузки инициирующих данных: ${err}`))
 
+//Не работает ошибка
+
     api.editAvatar()
-.then( (res) => {
- profileAvatar.src = res.avatar
-})
-.catch(err => console.log(`Ошибка загрузки аватарки: ${err}`))
+    .then( (res) => {
+      userAvatar.src = res.avatar
+    })
+    .catch(err => console.log(`Ошибка загрузки аватарки: ${err}`))
+
+
 
 // ============================================================================================
 //отрисовываем элементы на странице
@@ -66,7 +72,7 @@ const section = new Section ({
   renderer: renderCard
 }, '.elements');
 
-section.renderInitialItems();
+// section.renderInitialItems();
 
 //Функция добавляет карточку в DOM
 function renderCard({name, link}) {
