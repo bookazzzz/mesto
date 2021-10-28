@@ -41,19 +41,40 @@ const api = new Api ({
  });
 //
 
-  api.getAppInfo()
-    .then(([ userData, getInitialCards ]) => {
+// инфо пользователя с сервера //
+api.getUserInfo()
+  .then(res => {
+    userName.textContent = res.name;
+    userAbout.textContent = res.about;
+    userAvatar.src = res.avatar;
+  })
+  .then(() => {
+    // карточки с сервера //
+    api.getInitialCards()
+      .then(arrayCards => {
+        cardList.renderItems(arrayCards);
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  })
+  .catch(err => {
+    console.error(err);
+  });
 
-      // userInfo.setUserInfo({
-      //       name: userInfoRes.name,
-      //       about: userInfoRes.about,
-      //   })
-      userInfo.setUserInfo({name:userData.name, about:userData.about})
-      userInfo.setAvatar({avatar:userData.avatar})
-      section.renderInitialItems(getInitialCards)
+  // api.getAppInfo()
+  //   .then(([ userData, getInitialCards ]) => {
 
-    })
-    .catch(err => console.log(`Ошибка загрузки инициирующих данных: ${err}`))
+  //     // userInfo.setUserInfo({
+  //     //       name: userInfoRes.name,
+  //     //       about: userInfoRes.about,
+  //     //   })
+  //     userInfo.setUserInfo({name:userData.name, about:userData.about})
+  //     userInfo.setAvatar({avatar:userData.avatar})
+  //     section.renderInitialItems(getInitialCards)
+
+  //   })
+  //   .catch(err => console.log(`Ошибка загрузки инициирующих данных: ${err}`))
 
 //Не работает ошибка
 

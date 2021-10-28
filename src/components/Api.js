@@ -56,6 +56,7 @@ export default class Api {
 //Отрисовка начальных карточек
   getInitialCards() {
     return fetch(`${this._url}cards`, {
+      method: 'GET',
       headers: this._headers
     })
       .then(res => {
