@@ -93,18 +93,18 @@ function elementClickHandler() {
 
 
 // //Создаем попап формы редактирования профиля
-// const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
-//   api.editUserInfo(data)
-//   .then((res) => {
-//     userInfo.setUserInfo(res);
-//     popupWithFormEditProfile.close();
-//   })
-//   .catch((err) => {
-//       console.log(err);
-//   })
-// });
+const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
+  api.editUserInfo(data)
+  .then((res) => {
+    userInfo.setUserInfo(res);
+    popupWithFormEditProfile.close();
+  })
+  .catch((err) => {
+      console.log(err);
+  })
+});
 
-// popupWithFormEditProfile.setEventListeners();
+popupWithFormEditProfile.setEventListeners();
 
 // Отправка формы редактирования профиля
 const editProfileFormSubmit = () => {
