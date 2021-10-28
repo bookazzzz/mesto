@@ -10,7 +10,7 @@ import {
 import { Card } from '../components/Card.js';
 import Section from '../components/Section.js'
 import {
-  // initialCards,
+  initialCards,
   validationConfig
 } from '../script/Settings.js'
 
@@ -59,8 +59,7 @@ const api = new Api ({
 // ============================================================================================
 //отрисовываем элементы на странице
 const section = new Section ({
-  items: api.getInitialCards,
-  // items: initialCards,
+  items: initialCards,
   renderer: renderCard
 }, '.elements');
 
