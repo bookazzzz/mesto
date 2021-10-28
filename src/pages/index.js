@@ -41,40 +41,25 @@ const api = new Api ({
  });
 //
 
-// инфо пользователя с сервера //
-api.getUserInfo()
-  .then(res => {
-    userName.textContent = res.name;
-    userAbout.textContent = res.about;
-    userAvatar.src = res.avatar;
-  })
-  .then(() => {
-    // карточки с сервера //
-    api.getInitialCards()
+
+  api.getAppInfo()
+    .then(( userData) => {
+
+      // userInfo.setUserInfo({
+      //       name: userInfoRes.name,
+      //       about: userInfoRes.about,
+      //   })
+      userInfo.setUserInfo({name:userData.name, about:userData.about})
+      userInfo.setAvatar({avatar:userData.avatar})
+      api.getInitialCards()
       .then(arrayCards => {
-        cardList.renderItems(arrayCards);
+        section.renderInitialItems(arrayCards);
       })
       .catch(err => {
         console.error(err);
       })
-  })
-  .catch(err => {
-    console.error(err);
-  });
-
-  // api.getAppInfo()
-  //   .then(([ userData, getInitialCards ]) => {
-
-  //     // userInfo.setUserInfo({
-  //     //       name: userInfoRes.name,
-  //     //       about: userInfoRes.about,
-  //     //   })
-  //     userInfo.setUserInfo({name:userData.name, about:userData.about})
-  //     userInfo.setAvatar({avatar:userData.avatar})
-  //     section.renderInitialItems(getInitialCards)
-
-  //   })
-  //   .catch(err => console.log(`Ошибка загрузки инициирующих данных: ${err}`))
+    })
+    .catch(err => console.log(`Ошибка загрузки инициирующих данных: ${err}`))
 
 //Не работает ошибка
 
@@ -101,12 +86,20 @@ popupWithFormEditProfile.setEventListeners();
 
 
 // ============================================================================================
-//отрисовываем элементы на странице
 const section = new Section ({
-  items: api.getInitialCards,
-  // items: initialCards,
-  renderer: renderCard
+  renderer: (item) => {
+    const cardElement = createCard(item);
+    const cardLikesCount = cardElement.querySelector('.element__likes-count');
+    cardLikesCount.textContent = item.likes.length;
+    section.addItem(cardElement, "prepend")
+  }
 }, '.elements');
+
+//отрисовываем элементы на странице
+// const section = new Section ({
+//   items: initialCards,
+//   renderer: renderCard
+// }, '.elements');
 
 // section.renderInitialItems();
 
