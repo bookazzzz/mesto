@@ -18,7 +18,7 @@
     // if (avatar) this._userAvatar.src = url;
   }
 
-  setAvatar(url) {
-    this._userAvatar.src = url
+  setAvatar({avatar}) {
+    this._userAvatar.src = avatar;
   }
 }

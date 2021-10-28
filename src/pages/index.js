@@ -49,7 +49,7 @@ const api = new Api ({
       //       about: userInfoRes.about,
       //   })
       userInfo.setUserInfo({name:userData.name, about:userData.about})
-      userInfo.setAvatar(userData.avatar)
+      userInfo.setAvatar({avatar:userData.avatar})
       section.renderInitialItems(getInitialCards)
 
     })
