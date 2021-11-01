@@ -22,6 +22,8 @@ export default class Api {
   }
 //редактирование данных юзера
   editUserInfo(data) {
+    // console.log(data)
+
     return fetch(`${this._url}users/me`, {
       method: 'PATCH',
       headers: this._headers,

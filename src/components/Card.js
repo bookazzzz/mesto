@@ -29,7 +29,7 @@ export class Card {
 
 
 
-  _deleteCard() {
+  deleteCard() {
       this._element.remove();
       this._element = null;
   }
@@ -42,7 +42,7 @@ export class Card {
           this._likeCard()
       });
       this._element.querySelector('.element__delete').addEventListener('click', () => {
-          this._deleteCard()
+          this.deleteCard()
       });
       this._element.querySelector('.element__image').addEventListener('click', this._elementClickHandler.bind(this));
   }

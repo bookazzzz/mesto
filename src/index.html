@@ -15,11 +15,14 @@
       <main>
         <section class="profile">
           <div class="profile__main">
-            <img
+            <div class="profile__edit-avatar">
+              <img
               class="profile__avatar"
               src="<%=require('./images/Kusto.jpg')%>"
               alt="Фото Жак-Ив Кусто"
             />
+            </div>
+
             <div class="profile__info">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
               <button class="profile__edit" type="button"></button>
@@ -64,7 +67,7 @@
                 <input
                   class="popup__field popup__field_type_jobs"
                   type="text"
-                  name="job"
+                  name="about"
                   minlength="2"
                   maxlength="200"
                   required
@@ -124,7 +127,7 @@
           <form class="popup__form popup__form_download-avatar" name="avatar" novalidate>
               <input type="url" name="avatar" id="avatar"
                 class="popup__field popup__field-input_avatar" placeholder="Ссылка на картинку" required />
-              <span id="place-avatar-error" class="error"></span>
+              <span id="avatar-error" class="error"></span>
             <button type="submit" class="popup__button">Сохранить</button>
           </form>
         </div>

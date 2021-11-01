@@ -3,7 +3,15 @@ import './index.css';
 import {
   openPopupProfileButton,
   cardContainer,
-  openPopupAddCardButton
+  openPopupAddCardButton,
+  popupButtonList,
+  profileName,
+  profileJob,
+  profilePopup,
+  nameInputElement,
+  jobInputElement,
+  avatarInputElement,
+  avatarEdit
 } from '../script/constants.js'
 
 //Импорт создания карточки
@@ -11,7 +19,7 @@ import { Card } from '../components/Card.js';
 import Section from '../components/Section.js'
 import {
   initialCards,
-  validationConfig
+  validationConfig,
 } from '../script/Settings.js'
 
 //Импорт валидации
@@ -39,29 +47,117 @@ const api = new Api ({
   aboutSelector: '.profile__subtitle',
   avatarSelector: '.profile__avatar'
  });
-//
 
-
+//Загрузка имени пользователя и карточек с сервера
   api.getAppInfo()
     .then(([ userData, getInitialCards ]) => {
-
-      // userInfo.setUserInfo({
-      //       name: userInfoRes.name,
-      //       about: userInfoRes.about,
-      //   })
-      userInfo.setUserInfo({name:userData.name, about:userData.about, avatar:userData.avatar})
+      userInfo.setUserInfo({
+        name:userData.name,
+        about:userData.about,
+        avatar:userData.avatar
+      })
       console.log(getInitialCards)
+      api.getInitialCards()
+      .then(arrayCards => {
+        section.renderInitialItems(arrayCards);
+      })
+      .catch(err => {
+        console.error(err);
+      })
 
     })
     .catch(err => console.log(`Ошибка загрузки инициирующих данных: ${err}`))
 
+// экземпляр класса попап - редактирование профиля
+const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit',
+(data) => {
+  console.log(data)
+  api.editUserInfo({
+      name: data.name,
+      about: data.about
+    })
+    .then((info) => {
+      userInfo.setUserInfo({
+          name: info.name,
+          about: info.about
+      })
+      popupWithFormEditProfile.close();
+    })
+    .catch(err => console.log(`Ошибка при обновлении информации о пользователе: ${err}`));
+  });
+
+  popupWithFormEditProfile.setEventListeners();
+
+// Отправка формы редактирования профиля
+const editProfileFormSubmit = () => {
+  const data = userInfo.getUserInfo()
+  validFormProfile.toggleButtonState();
+  validFormProfile.resetValidation();
+  nameInputElement.value = data.name;
+  jobInputElement.value = data.about;
+  popupWithFormEditProfile.open()
+}
+
+//валидация формы редактирования профиля
+const validFormProfile = new FormValidator(validationConfig, popupWithFormEditProfile.form)
+validFormProfile.enableValidation()
+
+//слушатель клика по кнопке редактирования профиля
+openPopupProfileButton.addEventListener('click', editProfileFormSubmit)
+
+//Экземпляр формы редактирования аватара
+const popupWithFormAvatar = new PopupWithForm(".popup_avatar", (data) => {
+  api.setUserAvatar({
+      avatar: data.avatar
+    })
+    .then((info) => {
+      userInfo.setUserInfo({
+          avatar: info.avatar,
+      });
+      popupWithFormAvatar.close();
+    })
+    .catch(err => console.log(`При изменении аватара пользователя: ${err}`));
+});
+
+// Отправка формы редактирования аватара
+const editAvatarFormSubmit = () => {
+  const data = userInfo.getUserInfo()
+  validFormAvatar.toggleButtonState();
+  validFormAvatar.resetValidation();
+  avatarInputElement.value = data.avatar;
+  popupWithFormAvatar.open()
+}
+
+//валидация формы редактирования avatar
+const validFormAvatar = new FormValidator(validationConfig, popupWithFormAvatar.form)
+validFormAvatar.enableValidation()
+
+//слушатель клика по кнопке редактирования avatar
+
+avatarEdit.addEventListener('click', editAvatarFormSubmit)
+
+
+// ======================  экземпляр класса попап - Новая карточка  ===============================
+
+
+
+
 
 // ============================================================================================
-//отрисовываем элементы на странице
-const section = new Section ({
-  items: initialCards,
-  renderer: renderCard
+
+const section = new Section({
+  renderer: (item) => {
+    const cardElement = createCard(item);
+    const cardLikesCount = cardElement.querySelector('.element__likes-count');
+    cardLikesCount.textContent = item.likes.length;
+    section.addItem(cardElement, 'append');
+  }
 }, '.elements');
+//отрисовываем элементы на странице
+// const section = new Section ({
+//   items: initialCards,
+//   renderer: renderCard
+// }, '.elements');
 
 // section.renderInitialItems();
 
@@ -71,8 +167,8 @@ function renderCard({name, link}) {
   return cardContainer.prepend(card);
 }
 //Функция создает карточку по шаблону
-function createCard(name, link) {
-  const card = new Card(name, link,  '#element-template', elementClickHandler);
+function createCard(item) {
+  const card = new Card(item.name, item.link,  '#element-template', elementClickHandler);
 
   return card.generateCard();
 }
@@ -93,36 +189,36 @@ function elementClickHandler() {
 
 
 // //Создаем попап формы редактирования профиля
-const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
-  api.editUserInfo(data)
-  .then((res) => {
-    userInfo.setUserInfo(res);
-    popupWithFormEditProfile.close();
-  })
-  .catch((err) => {
-      console.log(err);
-  })
-});
+// const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit', (data) => {
+//   api.editUserInfo(data)
+//   .then((res) => {
+//     userInfo.setUserInfo(res);
+//     popupWithFormEditProfile.close();
+//   })
+//   .catch((err) => {
+//       console.log(err);
+//   })
+// });
 
-popupWithFormEditProfile.setEventListeners();
+// popupWithFormEditProfile.setEventListeners();
 
 // Отправка формы редактирования профиля
-const editProfileFormSubmit = () => {
-  const data = userInfo.getUserInfo()
-  validFormProfile.toggleButtonState();
-  validFormProfile.resetValidation();
-  for (let key in data) {
-    popupWithFormEditProfile.form.elements[key].value = data[key]
-  }
-  popupWithFormEditProfile.open()
-}
+// const editProfileFormSubmit = () => {
+//   const data = userInfo.getUserInfo()
+//   validFormProfile.toggleButtonState();
+//   validFormProfile.resetValidation();
+//   for (let key in data) {
+//     popupWithFormProfile.form.elements[key].value = data[key]
+//   }
+//   popupWithFormProfile.open()
+// }
 
 //валидация формы редактирования профиля
-const validFormProfile = new FormValidator(validationConfig, popupWithFormEditProfile.form)
-validFormProfile.enableValidation()
+// const validFormProfile = new FormValidator(validationConfig, popupWithFormProfile.form)
+// validFormProfile.enableValidation()
 
-//слушатель клика по кнопке редактирования профиля
-openPopupProfileButton.addEventListener('click', editProfileFormSubmit)
+// //слушатель клика по кнопке редактирования профиля
+// openPopupProfileButton.addEventListener('click', editProfileFormSubmit)
 
 //================= Popup добавления карточки ============================
 
