@@ -34,11 +34,11 @@ export default class PopupWithForm extends Popup {
     this.form.reset();
   }
 
-  renderLoading(isLoading) {
-    if (isLoading) {
-        this._popupButton.textContent = 'Сохранение...'
-    } else {
-        this._popupButton.textContent = this._popupButtonTextContent
-    }
-}
+  // renderLoading(isLoading) {
+  //   if (isLoading) {
+  //       this._popupButton.textContent = 'Сохранение...'
+  //   } else {
+  //       this._popupButton.textContent = this._popupButtonTextContent
+  //   }
+  // }
 }

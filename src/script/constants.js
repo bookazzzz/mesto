@@ -9,7 +9,8 @@ export {
   nameInputElement,
   jobInputElement,
   avatarInputElement,
-  avatarEdit
+  avatarEdit,
+  buttonDeliteСonfirmation
 };
 
 const openPopupProfileButton = document.querySelector('.profile__edit');
@@ -23,4 +24,5 @@ const nameInputElement = document.querySelector('.popup__field_type_name');
 const jobInputElement = document.querySelector('.popup__field_type_jobs');
 const avatarInputElement = document.querySelector('.popup__field-input_avatar');
 const avatarEdit = document.querySelector('.profile__edit-avatar');
+const buttonDeliteСonfirmation = document.querySelector('.popup__submit-button_delete-confirmation');
 

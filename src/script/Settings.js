@@ -33,3 +33,14 @@ export const validationConfig = {
   inputErrorClass: 'popup__field_type_error',
   errorClass: 'error_visible'
 };
+
+export const popupWithFormCardConfig = {
+  popupSelector: '.popup_type_add-card',
+  formSelector: '.popup__form',
+  inputSelector: '.popup__field'
+}
+
+export const removeCardPopupConfig = {
+  popupSelector: '.popup_delete-cofirm',
+  formSelector: '.popup__form'
+}

@@ -98,30 +98,17 @@ export default class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
       })
   }
-//добавление лайка
-  addLike(card) {
-    return fetch(`${this._url}cards/likes/${card}`, {
-      method: 'PUT',
-      headers: this._headers
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
+//добавление и удаление лайка
+updateCardLike(id, liked) {
+  return this._set(`cards/like/${id}`, liked ? 'PUT' : 'DELETE')
+}
+
+  _set(query, method, data) {
+    return fetch(`${this._url}/${query}`, {
+        method,
+        headers: this._headers,
+        body: data !== undefined ? JSON.stringify(data) : null
       })
-  }
-//удаление лайка
-  deleteLike(card) {
-    return fetch(`${this._url}cards/likes/${card}`, {
-      method: 'DELETE',
-      headers: this._headers
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
   }
 }
