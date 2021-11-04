@@ -7,7 +7,7 @@ export class Card {
     this._ownerId = data.owner._id
 
     this._currentUserId = currentUserId
-    this._cardSelector = cardSelector;
+    this._cardSelector = document.querySelector(cardSelector);
     this._handleLike = handleLike
     this._handleRemove = handleRemove
     this._elementClickHandler = elementClickHandler;
@@ -64,6 +64,8 @@ export class Card {
           this.deleteCard()
       });
       this._element.querySelector('.element__image').addEventListener('click', this._elementClickHandler.bind(this));
+      this._likeButtonElement.addEventListener('click', () => this._handleLike(this))
+      this._element.querySelector('.element__delete').addEventListener('click', () => this._handleRemove(this))
   }
 
   _updateLikes() {

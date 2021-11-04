@@ -56,7 +56,9 @@ let userId = null
       console.log(getInitialCards)
       api.getInitialCards()
       .then(arrayCards => {
+        // debugger
         cardsList.renderInitialItems(arrayCards);
+        // console.log(arrayCards)
       })
       .catch(err => {
         console.log(err);
@@ -68,7 +70,7 @@ let userId = null
 // экземпляр класса попап - редактирование профиля
 const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit',
 (data) => {
-  console.log(data)
+  // console.log(data)
   api.editUserInfo({
       name: data.name,
       about: data.about
@@ -135,7 +137,7 @@ avatarEdit.addEventListener('click', editAvatarFormSubmit)
 
 // ======================  экземпляр класса попап - Новая карточка  ===============================
 
-const popupWithFormCard = new PopupWithForm({popupWithFormCardConfig, handleSubmit:(data) => {
+const popupWithFormCard = new PopupWithForm(popupWithFormCardConfig.popupSelector, {handleSubmit:(data) => {
   renderLoading(popupWithFormCard, true, 'Создать', 'Создание...')
   api.addPlaceCard(data)
   .then(data => {
@@ -147,7 +149,6 @@ const popupWithFormCard = new PopupWithForm({popupWithFormCardConfig, handleSubm
     renderLoading(popupWithFormCard, false, 'Создать', 'Создание...')
 })
 }})
-
 popupWithFormCard.setEventListeners();
 document.querySelector('.profile__add-card').addEventListener('click', () => popupWithFormCard.open())
 
@@ -165,13 +166,17 @@ validFormCard.enableValidation()
 
 // отрисовка карточки
 const cardsList = new Section({
+  containerSelector: '.elements',
   renderer: (item) => {
+    // debugger
     const cardElement = createCard(item);
+    // console.log(cardElement)
     const cardLikesCount = cardElement.querySelector('.element__likes-count');
     cardLikesCount.textContent = item.likes.length;
     cardsList.addItem(cardElement, 'append');
   }
-}, '.elements');
+});
+// console.log(cardsList)
 
 //Функция создает карточку по шаблону
 function createCard(data) {
