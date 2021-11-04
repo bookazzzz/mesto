@@ -7,6 +7,10 @@ import {
   jobInputElement,
   avatarInputElement,
   avatarEdit,
+  saveButtonCardAdd,
+  saveButtonProfile,
+  saveButtonAvatar
+
 } from '../script/constants.js'
 
 //Импорт создания карточки
@@ -15,7 +19,9 @@ import Section from '../components/Section.js'
 import {
   popupWithFormCardConfig,
   validationConfig,
-  removeCardPopupConfig
+  removeCardPopupConfig,
+  popupWithFormAvatarConfig,
+  popupWithFormProfileConfig
 } from '../script/Settings.js'
 import {renderLoading} from '../script/renderLoading.js'
 //Импорт валидации
@@ -46,31 +52,23 @@ let userId = null
  });
 
 //Загрузка имени пользователя и карточек с сервера
-  api.getAppInfo()
+
+api.getAppInfo()
     .then(([ userData, getInitialCards ]) => {
       userInfo.setUserInfo({
         name:userData.name,
         about:userData.about,
         avatar:userData.avatar
       })
-      console.log(getInitialCards)
-      api.getInitialCards()
-      .then(arrayCards => {
-        // debugger
-        cardsList.renderInitialItems(arrayCards);
-        // console.log(arrayCards)
-      })
-      .catch(err => {
-        console.log(err);
-      })
-
+      userId = userData._id
+      cardsList.renderInitialItems(getInitialCards);
     })
     .catch(err => console.log(`Ошибка загрузки инициирующих данных: ${err}`))
 
 // экземпляр класса попап - редактирование профиля
-const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit',
-(data) => {
-  // console.log(data)
+const popupWithFormEditProfile = new PopupWithForm (popupWithFormProfileConfig.popupSelector,
+{submitForm: (data) => {
+  renderLoading(saveButtonProfile, 'Сохранение...')
   api.editUserInfo({
       name: data.name,
       about: data.about
@@ -82,8 +80,15 @@ const popupWithFormEditProfile = new PopupWithForm ('.popup_type_profile-edit',
       })
       popupWithFormEditProfile.close();
     })
-    .catch(err => console.log(`Ошибка при обновлении информации о пользователе: ${err}`));
-  });
+    .catch((err) => {
+      console.log(`Ошибка при обновлении информации о пользователе: ${err}`);
+    })
+    .finally(() => {
+      renderLoading(saveButtonProfile, 'Сохранить')
+    });
+ }
+});
+
 
   popupWithFormEditProfile.setEventListeners();
 
@@ -105,7 +110,8 @@ validFormProfile.enableValidation()
 openPopupProfileButton.addEventListener('click', editProfileFormSubmit)
 
 //Экземпляр формы редактирования аватара
-const popupWithFormAvatar = new PopupWithForm(".popup_avatar", (data) => {
+const popupWithFormAvatar = new PopupWithForm(popupWithFormAvatarConfig.popupSelector, {submitForm:(data) => {
+  renderLoading(saveButtonAvatar, 'Сохранение...')
   api.editAvatar(data.avatar)
     .then((info) => {
       userInfo.setUserInfo({
@@ -113,7 +119,13 @@ const popupWithFormAvatar = new PopupWithForm(".popup_avatar", (data) => {
       });
       popupWithFormAvatar.close();
     })
-    .catch(err => console.log(`При изменении аватара пользователя: ${err}`));
+    .catch((err) => {
+      console.log(`Ошибка при обновлении информации о пользователе: ${err}`);
+    })
+    .finally(() => {
+      renderLoading(saveButtonAvatar, 'Сохранить')
+    });
+ }
 });
 popupWithFormAvatar.setEventListeners();
 
@@ -137,8 +149,8 @@ avatarEdit.addEventListener('click', editAvatarFormSubmit)
 
 // ======================  экземпляр класса попап - Новая карточка  ===============================
 
-const popupWithFormCard = new PopupWithForm(popupWithFormCardConfig.popupSelector, {handleSubmit:(data) => {
-  renderLoading(popupWithFormCard, true, 'Создать', 'Создание...')
+const popupWithFormCard = new PopupWithForm(popupWithFormCardConfig.popupSelector, {submitForm:(data) => {
+  renderLoading(saveButtonCardAdd, 'Сохранение...')
   api.addPlaceCard(data)
   .then(data => {
     cardsList.addItem(createCard(data))
@@ -146,7 +158,7 @@ const popupWithFormCard = new PopupWithForm(popupWithFormCardConfig.popupSelecto
 })
 .catch(err => console.log(`Не удалось сохранить карточку: ${err}`))
 .finally(() => {
-    renderLoading(popupWithFormCard, false, 'Создать', 'Создание...')
+    renderLoading(saveButtonCardAdd, 'Сохранить')
 })
 }})
 popupWithFormCard.setEventListeners();
@@ -168,15 +180,12 @@ validFormCard.enableValidation()
 const cardsList = new Section({
   containerSelector: '.elements',
   renderer: (item) => {
-    // debugger
     const cardElement = createCard(item);
-    // console.log(cardElement)
     const cardLikesCount = cardElement.querySelector('.element__likes-count');
     cardLikesCount.textContent = item.likes.length;
     cardsList.addItem(cardElement, 'append');
   }
 });
-// console.log(cardsList)
 
 //Функция создает карточку по шаблону
 function createCard(data) {

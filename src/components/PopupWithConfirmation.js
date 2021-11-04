@@ -6,8 +6,8 @@ export default class PopupWithConfirmation extends Popup {
     this._formElement = document.querySelector(formSelector)
   }
 
-  setSubmitHandler(handleSubmit) {
-    this._handleSubmit = handleSubmit
+  setSubmitHandler(submitForm) {
+    this._submitForm = submitForm
   }
 
   setEventListeners() {
@@ -16,7 +16,7 @@ export default class PopupWithConfirmation extends Popup {
     this._formElement.addEventListener('submit', (event) => {
       event.preventDefault()
 
-      this._handleSubmit()
+      this._submitForm()
     })
   }
 }

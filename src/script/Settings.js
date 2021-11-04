@@ -44,3 +44,11 @@ export const removeCardPopupConfig = {
   popupSelector: '.popup_delete-cofirm',
   formSelector: '.popup__form'
 }
+
+export const popupWithFormAvatarConfig = {
+  popupSelector: '.popup_avatar',
+}
+
+export const popupWithFormProfileConfig = {
+  popupSelector: '.popup_type_profile-edit',
+}

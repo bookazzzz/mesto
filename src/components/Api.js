@@ -22,8 +22,6 @@ export default class Api {
   }
 //редактирование данных юзера
   editUserInfo(data) {
-    // console.log(data)
-
     return fetch(`${this._url}users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -100,14 +98,13 @@ export default class Api {
   }
 //добавление и удаление лайка
 updateCardLike(id, liked) {
-  return this._set(`cards/like/${id}`, liked ? 'PUT' : 'DELETE')
+  return this._set(`cards/likes/${id}`, liked ? 'PUT' : 'DELETE')
 }
 
-  _set(query, method, data) {
-    return fetch(`${this._url}/${query}`, {
+  _set(query, method) {
+    return fetch(`${this._url}${query}`, {
         method,
         headers: this._headers,
-        body: data !== undefined ? JSON.stringify(data) : null
       })
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
   }

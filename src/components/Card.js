@@ -46,10 +46,6 @@ export class Card {
       this._element.remove();
       this._element = null;
   }
-  _likeCard() {
-      const buttonLike = this._element.querySelector('.element__heart');
-      buttonLike.classList.toggle('element__heart_fill');
-  }
 
   getId() {
     return this._id
@@ -58,7 +54,7 @@ export class Card {
 
   _setEventListeners() {
       this._element.querySelector('.element__heart').addEventListener('click', () => {
-          this._likeCard()
+          this._updateLikes()
       });
       this._element.querySelector('.element__delete').addEventListener('click', () => {
           this.deleteCard()
