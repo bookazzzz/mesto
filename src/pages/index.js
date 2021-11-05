@@ -12,7 +12,7 @@ import {
   saveButtonAvatar,
   buttonDeliteСonfirmation
 
-} from '../script/constants.js'
+} from '../utils/constants.js'
 
 //Импорт создания карточки
 import { Card } from '../components/Card.js';
@@ -23,8 +23,8 @@ import {
   removeCardPopupConfig,
   popupWithFormAvatarConfig,
   popupWithFormProfileConfig
-} from '../script/Settings.js'
-import {renderLoading} from '../script/renderLoading.js'
+} from '../utils/Settings.js'
+import {renderLoading} from '../utils/renderLoading.js'
 //Импорт валидации
 import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from '../components/PopupWithImage.js'
