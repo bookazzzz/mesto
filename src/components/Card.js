@@ -56,9 +56,9 @@ export class Card {
       this._element.querySelector('.element__heart').addEventListener('click', () => {
           this._updateLikes()
       });
-      this._element.querySelector('.element__delete').addEventListener('click', () => {
+     /*  this._element.querySelector('.element__delete').addEventListener('click', () => {
           this.deleteCard()
-      });
+      }); */
       this._element.querySelector('.element__image').addEventListener('click', this._elementClickHandler.bind(this));
       this._likeButtonElement.addEventListener('click', () => this._handleLike(this))
       this._element.querySelector('.element__delete').addEventListener('click', () => this._handleRemove(this))

@@ -84,8 +84,8 @@ export default class Api {
       })
   }
 //удаление карточки
-  deletePlaceCard(card) {
-    return fetch(`${this._url}cards/${card}`, {
+  deletePlaceCard(id) {
+    return fetch(`${this._url}cards/${id}`, {
       method: 'DELETE',
       headers: this._headers
     })
@@ -96,6 +96,7 @@ export default class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
       })
   }
+
 //добавление и удаление лайка
 updateCardLike(id, liked) {
   return this._set(`cards/likes/${id}`, liked ? 'PUT' : 'DELETE')

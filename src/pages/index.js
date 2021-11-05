@@ -9,7 +9,8 @@ import {
   avatarEdit,
   saveButtonCardAdd,
   saveButtonProfile,
-  saveButtonAvatar
+  saveButtonAvatar,
+  buttonDeliteСonfirmation
 
 } from '../script/constants.js'
 
@@ -183,13 +184,13 @@ const cardsList = new Section({
     const cardElement = createCard(item);
     const cardLikesCount = cardElement.querySelector('.element__likes-count');
     cardLikesCount.textContent = item.likes.length;
-    cardsList.addItem(cardElement, 'append');
+    cardsList.addItem(cardElement);
   }
 });
 
 //Функция создает карточку по шаблону
 function createCard(data) {
-  const card = new Card({
+  const cardObj = new Card({
     data,
     currentUserId: userId,
     cardSelector:'#element-template',
@@ -202,24 +203,27 @@ function createCard(data) {
   handleRemove: (card) => {
       removeCardPopup.open()
       removeCardPopup.setSubmitHandler(() => {
-          renderLoading(removeCardPopup, true, 'Да', 'Удаление...')
+          renderLoading(buttonDeliteСonfirmation,'Удаление...')
 
           api
+
               .deletePlaceCard(card.getId())
+
               .then(() => {
-                  card.deleteCard()
+                card.deleteCard()
                   removeCardPopup.close()
               })
               .catch(err => console.log(`Не удалось удалить карточку: ${err}`))
+
               .finally(() => {
-                  renderLoading(removeCardPopup, false, 'Да', 'Удаление...')
+                  renderLoading(buttonDeliteСonfirmation, 'Да')
               })
       })
   },
   elementClickHandler
 })
 
-  return card.generateCard();
+  return cardObj.generateCard();
 }
 
 //================= Popup большой картинки ============================
