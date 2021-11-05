@@ -31,5 +31,5 @@ const nameInputElement = document.querySelector('.popup__field_type_name');
 const jobInputElement = document.querySelector('.popup__field_type_jobs');
 const avatarInputElement = document.querySelector('.popup__field_input_avatar');
 const avatarEdit = document.querySelector('.profile__edit-avatar');
-const buttonDeliteСonfirmation = document.querySelector('.popup__submit_delete');
+const buttonDeliteСonfirmation = document.querySelector('.popup__submit-delete');
 
