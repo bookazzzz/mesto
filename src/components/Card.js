@@ -1,5 +1,5 @@
 export class Card {
-  constructor({data,currentUserId,cardSelector,handleLike,handleRemove,elementClickHandler}) {
+  constructor({data,currentUserId,cardSelector,handleLike,handleRemove,elementClickHandler,}) {
     this._id = data._id
     this._name = data.name
     this._link = data.link
@@ -11,6 +11,8 @@ export class Card {
     this._handleLike = handleLike
     this._handleRemove = handleRemove
     this._elementClickHandler = elementClickHandler;
+
+    this._cardLikesCount = data.likes.length;
   }
   _getTemplate() {
     return this._cardSelector.content.querySelector('.element').cloneNode(true)
@@ -26,6 +28,7 @@ export class Card {
         this._currentUserId === this._ownerId ? 'element__delete_active' : 'element__delete_hidden'
     )
     this._likeButtonElement = this._element.querySelector('.element__heart')
+    this._cardLikesCount =  document.querySelector('.element__likes-count');
     this._updateLikes()
     this._setEventListeners()
 

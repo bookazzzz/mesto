@@ -13,12 +13,7 @@ export default class Api {
     return fetch(`${this._url}users/me`, {
       headers: this._headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
 //редактирование данных юзера
   editUserInfo(data) {
@@ -30,12 +25,7 @@ export default class Api {
         about: data.about
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
 //редактирование аватара
   editAvatar(avatar) {
@@ -46,12 +36,7 @@ export default class Api {
         avatar: avatar
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
 //Отрисовка начальных карточек
   getInitialCards() {
@@ -59,12 +44,7 @@ export default class Api {
       method: 'GET',
       headers: this._headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
 //добавление карточки
   addPlaceCard(data) {
@@ -76,12 +56,7 @@ export default class Api {
         link: data.link
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
 //удаление карточки
   deletePlaceCard(id) {
@@ -89,12 +64,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
 
 //добавление и удаление лайка
@@ -102,11 +72,19 @@ updateCardLike(id, liked) {
   return this._set(`cards/likes/${id}`, liked ? 'PUT' : 'DELETE')
 }
 
-  _set(query, method) {
-    return fetch(`${this._url}${query}`, {
-        method,
-        headers: this._headers,
-      })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
-  }
+_set(query, method) {
+  return fetch(`${this._url}${query}`, {
+    method,
+    headers: this._headers,
+  })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
 }
+
+_checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+   }
+}
+

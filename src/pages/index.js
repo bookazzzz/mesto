@@ -131,11 +131,10 @@ const popupWithFormAvatar = new PopupWithForm(popupWithFormAvatarConfig.popupSel
 popupWithFormAvatar.setEventListeners();
 
 // Отправка формы редактирования аватара
-const editAvatarFormSubmit = () => {
+const openAvatarPopup = () => {
   const data = userInfo.getUserInfo()
   validFormAvatar.toggleButtonState();
   validFormAvatar.resetValidation();
-  avatarInputElement.value = data.avatar;
   popupWithFormAvatar.open()
 }
 
@@ -145,7 +144,7 @@ validFormAvatar.enableValidation()
 
 //слушатель клика по кнопке редактирования avatar
 
-avatarEdit.addEventListener('click', editAvatarFormSubmit)
+avatarEdit.addEventListener('click', openAvatarPopup)
 
 
 // ======================  экземпляр класса попап - Новая карточка  ===============================
@@ -163,7 +162,6 @@ const popupWithFormCard = new PopupWithForm(popupWithFormCardConfig.popupSelecto
 })
 }})
 popupWithFormCard.setEventListeners();
-document.querySelector('.profile__add-card').addEventListener('click', () => popupWithFormCard.open())
 
 // //слушатель клика по кнопке добавления карточки
 openPopupAddCardButton.addEventListener('click', () => {
@@ -182,8 +180,6 @@ const cardsList = new Section({
   containerSelector: '.elements',
   renderer: (item) => {
     const cardElement = createCard(item);
-    const cardLikesCount = cardElement.querySelector('.element__likes-count');
-    cardLikesCount.textContent = item.likes.length;
     cardsList.addItem(cardElement);
   }
 });
@@ -220,7 +216,9 @@ function createCard(data) {
               })
       })
   },
-  elementClickHandler
+  elementClickHandler: () => {
+    popupWithImage.open(data.name, data.link);
+  }
 })
 
   return cardObj.generateCard();
@@ -231,11 +229,6 @@ function createCard(data) {
 //создаём попап с картинкой
 const popupWithImage = new PopupWithImage('.popup_big-size-image')
 popupWithImage.setEventListeners()
-
-//функция открытия попапа с картинкой
-function elementClickHandler() {
-  popupWithImage.open(this._name, this._link);
-}
 
 //================= Popup подтверждения удаления карточки ============================
 
